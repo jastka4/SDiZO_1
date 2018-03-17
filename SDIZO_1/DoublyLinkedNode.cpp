@@ -1,9 +1,9 @@
 #include "stdafx.h"
 #include "DoublyLinkedNode.h"
 
-DoublyLinkedNode::DoublyLinkedNode(int data)
+DoublyLinkedNode::DoublyLinkedNode(int _data)
 {
-	data = data;
+	data = _data;
 	next = previous = NULL;
 }
 

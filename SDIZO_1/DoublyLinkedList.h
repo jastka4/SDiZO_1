@@ -3,22 +3,23 @@
 
 class DoublyLinkedList
 {
-	int size;
 	DoublyLinkedNode *firstNode,
 					 *lastNode;
 
+	void insertBefore(DoublyLinkedNode*, int);
+	void insertAfter(DoublyLinkedNode*, int);
 public:
 	DoublyLinkedList();
 	~DoublyLinkedList();
 
-	void insertAtBeggining(DoublyLinkedNode*);
-	void insertAtEnd(DoublyLinkedNode*);
-	void insertBefore(DoublyLinkedNode*, DoublyLinkedNode*);
-	void insertAfter(DoublyLinkedNode*, DoublyLinkedNode*);
-	void remove(DoublyLinkedNode*);
+	void insertBefore(int, int);
+	void insertAfter(int, int);
+	void insertAtBeggining(int);
+	void insertAtEnd(int);
+	void remove(int);
 	void removeAtBeggining();
 	void removeAtEnd();
-	DoublyLinkedNode* find(DoublyLinkedNode*);
+	DoublyLinkedNode* find(int);
 	void display();
 };
 
