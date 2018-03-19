@@ -152,6 +152,8 @@
     <ClInclude Include="DoublyLinkedList.h" />
     <ClInclude Include="DoublyLinkedNode.h" />
     <ClInclude Include="MaxHeap.h" />
+    <ClInclude Include="RedBlackTree.h" />
+    <ClInclude Include="RedBlackTreeNode.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -161,6 +163,8 @@
     <ClCompile Include="DoublyLinkedNode.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MaxHeap.cpp" />
+    <ClCompile Include="RedBlackTree.cpp" />
+    <ClCompile Include="RedBlackTreeNode.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
