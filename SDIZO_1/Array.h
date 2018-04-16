@@ -8,9 +8,9 @@ public:
 	Array();
 	~Array();
 
+	void insertAt(size_t, int);
 	void insertAtBeggining(int);
 	void insertAtEnd(int);
-	void insertAt(size_t, int);
 	void removeAt(size_t);
 	void removeAtBeggining();
 	void removeAtEnd();

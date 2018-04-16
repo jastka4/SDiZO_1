@@ -5,7 +5,7 @@
 Array::Array()
 {
 	size = 0;
-	array = NULL;
+	array = nullptr;
 }
 
 Array::~Array()
@@ -19,7 +19,6 @@ void Array::relocate(size_t newSize)
 	int* temp = new int[newSize];
 	if (newSize >= size)
 	{
-		//std::copy(array, array + (size - 1), temp);
 		for (size_t i = 0; i < size; i++)
 		{
 			temp[i] = array[i];
@@ -27,12 +26,12 @@ void Array::relocate(size_t newSize)
 	}	
 	else
 	{
-		//std::copy(array, array + (newSize - 1), temp);
 		for (size_t i = 0; i < newSize; i++)
 		{
 			temp[i] = array[i];
 		}
 	}
+	delete array;
 	array = temp;
 }
 
@@ -112,7 +111,7 @@ void Array::removeAtEnd()
 		std::cout << "Array is empty. Cannot remove element" << std::endl;
 	else
 	{
-		array[size - 1] = NULL;
+		array[size - 1] = 0;
 		relocate(size - 1);
 		size--;
 	}
@@ -124,7 +123,7 @@ size_t Array::find(int data)
 	{
 		if (array[i] == data)
 			return i;
-		return NULL;
+		return 0;
 	}
 }
 

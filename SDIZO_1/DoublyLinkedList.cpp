@@ -4,7 +4,7 @@
 
 DoublyLinkedList::DoublyLinkedList()
 {
-	firstNode = lastNode = NULL;
+	firstNode = lastNode = nullptr;
 }
 
 DoublyLinkedList::~DoublyLinkedList()
@@ -14,29 +14,29 @@ DoublyLinkedList::~DoublyLinkedList()
 	while (firstNode)
 	{
 		currentNode = firstNode->next;
-		delete currentNode;
+		delete firstNode;
 		firstNode = currentNode;
 	}
 
-	firstNode = lastNode = NULL;
+	firstNode = lastNode = nullptr;
 }
 
 void DoublyLinkedList::insertAtBeggining(int data)
 {
 	DoublyLinkedNode* node = new DoublyLinkedNode(data);
-	if (firstNode == NULL)
+	if (firstNode == nullptr)
 	{
 		firstNode = node;
 		lastNode = node;
-		node->next = NULL;
-		node->previous = NULL;	}
+		node->next = nullptr;
+		node->previous = nullptr;	}
 	else
 		insertBefore(firstNode, data);
 }
 
 void DoublyLinkedList::insertAtEnd(int data)
 {
-	if (lastNode == NULL)
+	if (lastNode == nullptr)
 		insertAtBeggining(data);
 	else
 		insertAfter(lastNode, data);
@@ -46,7 +46,7 @@ void DoublyLinkedList::insertBefore(DoublyLinkedNode *node, int data)
 {
 	DoublyLinkedNode* newNode = new DoublyLinkedNode(data);
 	newNode->next = node;
-	if (node->previous == NULL)
+	if (node->previous == nullptr)
 		firstNode = newNode;
 	else
 	{
@@ -66,7 +66,7 @@ void DoublyLinkedList::insertAfter(DoublyLinkedNode *node, int data)
 {
 	DoublyLinkedNode* newNode = new DoublyLinkedNode(data);
 	newNode->previous = node;
-	if (node->next == NULL)
+	if (node->next == nullptr)
 		lastNode = newNode;
 	else
 	{
@@ -85,45 +85,62 @@ void DoublyLinkedList::insertAfter(int previousData, int data)
 
 void DoublyLinkedList::remove(int data)
 {
-	if (firstNode != NULL)
+	if (firstNode != nullptr)
 	{
 		DoublyLinkedNode* node = find(data);
 
-		if (node->previous == NULL)
-		firstNode = node->next;
+		if (node == nullptr)
+			std::cout << "Could not find value: " << data << std::endl;
 		else
-		node->previous->next = node->next;
+		{
+			if (node->previous == nullptr)
+				firstNode = node->next;
+			else
+				node->previous->next = node->next;
 
-		if (node->next == NULL)
-		lastNode = node->previous;
-		else
-		node->next->previous = node->previous;
+			if (node->next == nullptr)
+				lastNode = node->previous;
+			else
+				node->next->previous = node->previous;
+
+			delete node;
+		}
 	}
 }
 
 void DoublyLinkedList::removeAtBeggining()
 {
-	firstNode->next->previous = NULL;
-	firstNode = firstNode->next;
+	if (firstNode != nullptr)
+	{
+		DoublyLinkedNode* currentNode = firstNode;
+		firstNode->next->previous = nullptr;
+		firstNode = firstNode->next;
+		delete currentNode;
+	}
 }
 
 void DoublyLinkedList::removeAtEnd()
 {
-	lastNode->previous->next = NULL;
-	lastNode = lastNode->previous;
+	if (firstNode != nullptr)
+	{
+		DoublyLinkedNode* currentNode = lastNode;
+		lastNode->previous->next = nullptr;
+		lastNode = lastNode->previous;
+		delete currentNode;
+	}
 }
 
 DoublyLinkedNode* DoublyLinkedList::find(int data)
 {
 	DoublyLinkedNode *currentNode = firstNode;
-	while (currentNode != NULL)
+	while (currentNode != nullptr)
 	{
 		if (currentNode->data == data)
 			return currentNode;
 		else currentNode = currentNode->next;
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 void DoublyLinkedList::display()
@@ -131,7 +148,7 @@ void DoublyLinkedList::display()
 	DoublyLinkedNode *currentNode = firstNode;
 	int index = 0;
 
-	while (currentNode != NULL)
+	while (currentNode != nullptr)
 	{
 		std::cout << "(Node: " << index++ << " Value: " << currentNode->data << ")";
 		if (currentNode != lastNode)

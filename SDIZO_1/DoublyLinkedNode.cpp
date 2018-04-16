@@ -1,14 +1,15 @@
 #include "stdafx.h"
 #include "DoublyLinkedNode.h"
+#include <iostream>
 
 DoublyLinkedNode::DoublyLinkedNode(int _data)
 {
 	data = _data;
-	next = previous = NULL;
+	next = previous = nullptr;
 }
 
 DoublyLinkedNode::~DoublyLinkedNode()
 {
-	next = previous = NULL;
+	next = previous = nullptr;
 	data = 0;
 }

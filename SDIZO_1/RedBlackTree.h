@@ -12,8 +12,8 @@ class RedBlackTree
 	void preorderBST(RedBlackTreeNode*);
 	void inorderBST(RedBlackTreeNode*);
 	void postorderBST(RedBlackTreeNode*);
-	int getColor(RedBlackTreeNode *);
-	void setColor(RedBlackTreeNode *, int);
+	int getColor(RedBlackTreeNode*);
+	void setColor(RedBlackTreeNode*, int);
 	RedBlackTreeNode *minValueNode(RedBlackTreeNode*);
 	RedBlackTreeNode* insertBST(RedBlackTreeNode*, RedBlackTreeNode*);
 	RedBlackTreeNode* deleteBST(RedBlackTreeNode*, int);
@@ -29,5 +29,5 @@ public:
 	void preorder();
 	void inorder();
 	void postorder();
+	void displayTree();
 };
-

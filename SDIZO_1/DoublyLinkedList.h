@@ -4,7 +4,7 @@
 class DoublyLinkedList
 {
 	DoublyLinkedNode *firstNode,
-					 *lastNode;
+		 *lastNode;
 
 	void insertBefore(DoublyLinkedNode*, int);
 	void insertAfter(DoublyLinkedNode*, int);

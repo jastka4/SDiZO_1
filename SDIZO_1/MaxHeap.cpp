@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "MaxHeap.h"
 #include <iostream>
+#include <iomanip>
 
 MaxHeap::MaxHeap()
 {
@@ -46,6 +47,7 @@ void MaxHeap::relocate(size_t newSize)
 			temp[i] = heap[i];
 		}
 	}
+	delete heap;
 	heap = temp;
 }
 
@@ -56,12 +58,7 @@ void MaxHeap::swap(int *x, int *y)
 	*y = temp;
 }
 
-int MaxHeap::getMax()
-{
-	return heap[0];
-}
-
-void MaxHeap::insertKey(int key)
+void MaxHeap::push(int key)
 {
 	relocate(size + 1);
 	size++;
@@ -85,10 +82,13 @@ void MaxHeap::increaseKey(size_t index, int newValue)
 	}
 }
 
-int MaxHeap::extractMax()
+int MaxHeap::pop()
 {
 	if (size <= 0)
-		std::cout << "Heap is empty";
+	{
+		std::cout << "Heap is empty" << std::endl;
+		return -1;
+	}
 	else if (size == 1)
 	{
 		size--;
@@ -104,17 +104,17 @@ int MaxHeap::extractMax()
 	return root;
 }
 
-void MaxHeap::deleteKey(int value) //TODO: find element by value 
+void MaxHeap::remove(int value)
 {
 	size_t key = find(value);
 	if (key == -1)
 	{
-		std::cout << "Value not found" << std::endl;
+		std::cout << "Could not find value: " << value << std::endl;
 		return;
 	}
 
 	increaseKey(key, INT_MAX);
-	extractMax();
+	pop();
 }
 
 void MaxHeap::heapify(size_t index)
@@ -159,4 +159,18 @@ void MaxHeap::display()
 	}
 
 	std::cout << std::endl;
+}
+
+void MaxHeap::display(int index, int offset)
+{
+	if (getRightChild(index) < size)
+		display(getRightChild(index), offset + 5);
+	std::cout << std::setw(offset) << heap[index] << std::endl;
+	if (getLeftChild(index) < size)
+		display(getLeftChild(index), offset + 5);
+}
+
+void MaxHeap::displayTree()
+{
+		display(0, 0);
 }

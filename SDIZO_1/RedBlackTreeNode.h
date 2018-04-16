@@ -7,9 +7,12 @@ class RedBlackTreeNode
 public:
 	int data;
 	int color;
-	RedBlackTreeNode *left, *right, *parent;
+	RedBlackTreeNode *left,
+					 *right,
+					 *parent;
 
 	RedBlackTreeNode(int);
 	~RedBlackTreeNode();
+	void display(int = 0);
 };
 

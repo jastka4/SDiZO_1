@@ -1,10 +1,10 @@
 #pragma once
-class DoublyLinkedNode //implement as a structure?
+
+class DoublyLinkedNode
 {
 public:
 	int data;
 	DoublyLinkedNode *previous, *next;
-	DoublyLinkedNode(int data);
+	DoublyLinkedNode(int);
 	~DoublyLinkedNode();
 };
-
