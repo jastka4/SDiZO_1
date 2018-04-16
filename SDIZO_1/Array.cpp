@@ -5,9 +5,8 @@
 Array::Array()
 {
 	size = 0;
-	array = new int[size];
+	array = NULL;
 }
-
 
 Array::~Array()
 {

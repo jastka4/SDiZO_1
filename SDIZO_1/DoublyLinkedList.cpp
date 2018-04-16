@@ -17,6 +17,8 @@ DoublyLinkedList::~DoublyLinkedList()
 		delete currentNode;
 		firstNode = currentNode;
 	}
+
+	firstNode = lastNode = NULL;
 }
 
 void DoublyLinkedList::insertAtBeggining(int data)

@@ -17,4 +17,3 @@ public:
 	size_t find(int);
 	void display();
 };
-

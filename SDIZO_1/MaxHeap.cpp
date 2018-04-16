@@ -2,7 +2,7 @@
 #include "MaxHeap.h"
 #include <iostream>
 
-MaxHeap::MaxHeap() //find(int value)
+MaxHeap::MaxHeap()
 {
 	size = 0;
 	heap = new int[size];
