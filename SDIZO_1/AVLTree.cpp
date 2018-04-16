@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "AVLTree.h"
 #include <iostream>
 
@@ -222,19 +221,16 @@ void AVLTree::postorderBST(AVLTreeNode *node)
 void AVLTree::preorder()
 {
 	preorderBST(root);
-	std::cout << "-------" << std::endl;
 }
 
 void AVLTree::inorder()
 {
 	AVLTree(root);
-	std::cout << "-------" << std::endl;
 }
 
 void AVLTree::postorder()
 {
 	postorderBST(root);
-	std::cout << "-------" << std::endl;
 }
 
 void AVLTree::displayTree()

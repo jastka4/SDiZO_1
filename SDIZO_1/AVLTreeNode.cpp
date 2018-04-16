@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "AVLTreeNode.h"
 #include <iostream>
 #include <iomanip>

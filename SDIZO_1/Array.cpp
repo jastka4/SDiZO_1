@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "Array.h"
 #include <iostream>
 
@@ -123,8 +122,8 @@ size_t Array::find(int data)
 	{
 		if (array[i] == data)
 			return i;
-		return 0;
 	}
+	return -1;
 }
 
 void Array::display()

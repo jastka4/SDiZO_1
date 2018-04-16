@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "MaxHeap.h"
 #include <iostream>
 #include <iomanip>
