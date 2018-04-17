@@ -16,4 +16,6 @@ public:
 	void removeAtEnd();
 	size_t find(int);
 	void display();
+
+	size_t getSize();
 };

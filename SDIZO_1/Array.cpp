@@ -136,3 +136,8 @@ void Array::display()
 	}
 	std::cout << std::endl;
 }
+
+size_t Array::getSize()
+{
+	return size;
+}
