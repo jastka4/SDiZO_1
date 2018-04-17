@@ -90,7 +90,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp14</LanguageStandard>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -149,27 +149,31 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Array.h" />
+    <ClInclude Include="AutomatedTest.h" />
     <ClInclude Include="AVLTree.h" />
     <ClInclude Include="AVLTreeNode.h" />
     <ClInclude Include="DoublyLinkedList.h" />
     <ClInclude Include="DoublyLinkedNode.h" />
+    <ClInclude Include="ManualTest.h" />
     <ClInclude Include="MaxHeap.h" />
     <ClInclude Include="RedBlackTree.h" />
     <ClInclude Include="RedBlackTreeNode.h" />
-    <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="Timer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Array.cpp" />
+    <ClCompile Include="AutomatedTest.cpp" />
     <ClCompile Include="AVLTree.cpp" />
     <ClCompile Include="AVLTreeNode.cpp" />
     <ClCompile Include="DoublyLinkedList.cpp" />
     <ClCompile Include="DoublyLinkedNode.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ManualTest.cpp" />
     <ClCompile Include="MaxHeap.cpp" />
     <ClCompile Include="RedBlackTree.cpp" />
     <ClCompile Include="RedBlackTreeNode.cpp" />
-    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

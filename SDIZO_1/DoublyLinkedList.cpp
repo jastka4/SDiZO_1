@@ -58,7 +58,10 @@ void DoublyLinkedList::insertBefore(DoublyLinkedNode *node, int data)
 void DoublyLinkedList::insertBefore(int nextData, int data)
 {
 	DoublyLinkedNode* node = find(nextData);
-	insertBefore(node, data);
+	if (node == nullptr)
+		insertAtBeggining(data);
+	else
+		insertBefore(node, data);
 }
 
 void DoublyLinkedList::insertAfter(DoublyLinkedNode *node, int data)
@@ -78,7 +81,10 @@ void DoublyLinkedList::insertAfter(DoublyLinkedNode *node, int data)
 void DoublyLinkedList::insertAfter(int previousData, int data)
 {
 	DoublyLinkedNode* node = find(previousData);
-	insertAfter(node, data);
+	if (node == nullptr)
+		insertAtEnd(data);
+	else
+		insertAfter(node, data);
 }
 
 
@@ -112,20 +118,28 @@ void DoublyLinkedList::removeAtBeggining()
 	if (firstNode != nullptr)
 	{
 		DoublyLinkedNode* currentNode = firstNode;
-		firstNode->next->previous = nullptr;
+		if(firstNode->next != nullptr)
+			firstNode->next->previous = nullptr;
 		firstNode = firstNode->next;
 		delete currentNode;
+
+		if (firstNode == nullptr)
+			lastNode = firstNode;
 	}
 }
 
 void DoublyLinkedList::removeAtEnd()
 {
-	if (firstNode != nullptr)
+	if (lastNode != nullptr)
 	{
 		DoublyLinkedNode* currentNode = lastNode;
-		lastNode->previous->next = nullptr;
+		if(lastNode->previous != nullptr)
+			lastNode->previous->next = nullptr;
 		lastNode = lastNode->previous;
 		delete currentNode;
+
+		if (lastNode == nullptr)
+			firstNode = lastNode;
 	}
 }
 
