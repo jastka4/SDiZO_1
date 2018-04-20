@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "DoublyLinkedNode.h"
 #include <iostream>
 

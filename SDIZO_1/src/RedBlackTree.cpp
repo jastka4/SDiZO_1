@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "RedBlackTree.h"
 #include <iostream>
 #include <windows.h> 

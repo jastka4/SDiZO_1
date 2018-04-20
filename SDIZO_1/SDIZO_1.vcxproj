@@ -72,15 +72,23 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <OutDir>.\bin\</OutDir>
+    <IntDir>.\build\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <OutDir>.\bin\</OutDir>
+    <IntDir>.\build\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <OutDir>.\src</OutDir>
+    <IntDir>.\build</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <OutDir>.\src</OutDir>
+    <IntDir>.\build</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -91,6 +99,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>D:\Aplikacje\C++\SDiZO_1\SDIZO_1\src;D:\Aplikacje\C++\SDiZO_1\SDIZO_1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -99,12 +108,13 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>D:\Aplikacje\C++\SDiZO_1\SDIZO_1\src;D:\Aplikacje\C++\SDiZO_1\SDIZO_1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -121,6 +131,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>D:\Aplikacje\C++\SDiZO_1\SDIZO_1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -139,6 +150,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>D:\Aplikacje\C++\SDiZO_1\SDIZO_1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -148,32 +160,31 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Array.h" />
-    <ClInclude Include="AutomatedTest.h" />
-    <ClInclude Include="AVLTree.h" />
-    <ClInclude Include="AVLTreeNode.h" />
-    <ClInclude Include="DoublyLinkedList.h" />
-    <ClInclude Include="DoublyLinkedNode.h" />
-    <ClInclude Include="ManualTest.h" />
-    <ClInclude Include="MaxHeap.h" />
-    <ClInclude Include="RedBlackTree.h" />
-    <ClInclude Include="RedBlackTreeNode.h" />
-    <ClInclude Include="targetver.h" />
-    <ClInclude Include="Timer.h" />
+    <ClInclude Include="src\Array.h" />
+    <ClInclude Include="src\AutomatedTest.h" />
+    <ClInclude Include="src\AVLTree.h" />
+    <ClInclude Include="src\AVLTreeNode.h" />
+    <ClInclude Include="src\DoublyLinkedList.h" />
+    <ClInclude Include="src\DoublyLinkedNode.h" />
+    <ClInclude Include="src\ManualTest.h" />
+    <ClInclude Include="src\MaxHeap.h" />
+    <ClInclude Include="src\RedBlackTree.h" />
+    <ClInclude Include="src\RedBlackTreeNode.h" />
+    <ClInclude Include="src\Timer.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Array.cpp" />
-    <ClCompile Include="AutomatedTest.cpp" />
-    <ClCompile Include="AVLTree.cpp" />
-    <ClCompile Include="AVLTreeNode.cpp" />
-    <ClCompile Include="DoublyLinkedList.cpp" />
-    <ClCompile Include="DoublyLinkedNode.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="ManualTest.cpp" />
-    <ClCompile Include="MaxHeap.cpp" />
-    <ClCompile Include="RedBlackTree.cpp" />
-    <ClCompile Include="RedBlackTreeNode.cpp" />
-    <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="src\Array.cpp" />
+    <ClCompile Include="src\AutomatedTest.cpp" />
+    <ClCompile Include="src\AVLTree.cpp" />
+    <ClCompile Include="src\AVLTreeNode.cpp" />
+    <ClCompile Include="src\DoublyLinkedList.cpp" />
+    <ClCompile Include="src\DoublyLinkedNode.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\ManualTest.cpp" />
+    <ClCompile Include="src\MaxHeap.cpp" />
+    <ClCompile Include="src\RedBlackTree.cpp" />
+    <ClCompile Include="src\RedBlackTreeNode.cpp" />
+    <ClCompile Include="src\Timer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

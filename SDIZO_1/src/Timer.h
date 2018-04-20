@@ -9,6 +9,5 @@ class Timer
 public:
 	void start();
 	void stop();
-	unsigned long getTime();
+	__int64 getTime();
 };
-

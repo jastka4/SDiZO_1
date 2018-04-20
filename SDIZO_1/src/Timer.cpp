@@ -10,7 +10,7 @@ void Timer::stop()
 	endTime = std::chrono::high_resolution_clock::now();
 }
 
-unsigned long Timer::getTime()
+__int64 Timer::getTime()
 {
 	return std::chrono::duration_cast<std::chrono::nanoseconds>(endTime - startTime).count();
 }
