@@ -1,15 +1,13 @@
 #pragma once
 #include <iostream>
 #include <fstream>
+#include "Test.h"
 
-class AutomatedTest
+class AutomatedTest :
+	public Test
 {
-	std::string inputData, outputData;
-
-	std::ofstream outputFile;
-	std::ifstream inputFile;
-
 	void getInputOutputFiles(std::string);
+
 public:
 	void array();
 	void list();
@@ -17,4 +15,3 @@ public:
 	void RBTree();
 	void AVLTree();
 };
-

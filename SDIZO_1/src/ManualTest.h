@@ -1,5 +1,8 @@
 #pragma once
-class ManualTest
+#include "Test.h"
+
+class ManualTest :
+	public Test
 {
 public:
 	void array();
