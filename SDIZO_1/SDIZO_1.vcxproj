@@ -166,8 +166,10 @@
     <ClInclude Include="src\AVLTreeNode.h" />
     <ClInclude Include="src\DoublyLinkedList.h" />
     <ClInclude Include="src\DoublyLinkedNode.h" />
+    <ClInclude Include="src\FullTest.h" />
     <ClInclude Include="src\ManualTest.h" />
     <ClInclude Include="src\MaxHeap.h" />
+    <ClInclude Include="src\Test.h" />
     <ClInclude Include="src\RedBlackTree.h" />
     <ClInclude Include="src\RedBlackTreeNode.h" />
     <ClInclude Include="src\Timer.h" />
@@ -179,11 +181,13 @@
     <ClCompile Include="src\AVLTreeNode.cpp" />
     <ClCompile Include="src\DoublyLinkedList.cpp" />
     <ClCompile Include="src\DoublyLinkedNode.cpp" />
+    <ClCompile Include="src\FullTest.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ManualTest.cpp" />
     <ClCompile Include="src\MaxHeap.cpp" />
     <ClCompile Include="src\RedBlackTree.cpp" />
     <ClCompile Include="src\RedBlackTreeNode.cpp" />
+    <ClCompile Include="src\Test.cpp" />
     <ClCompile Include="src\Timer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

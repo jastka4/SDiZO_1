@@ -11,6 +11,7 @@ public:
 					 *right,
 					 *parent;
 
+	RedBlackTreeNode();
 	RedBlackTreeNode(int);
 	~RedBlackTreeNode();
 	void display(int = 0);

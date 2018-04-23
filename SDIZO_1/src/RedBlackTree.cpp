@@ -4,18 +4,30 @@
 
 RedBlackTree::RedBlackTree()
 {
-	root = nullptr;
+	nil = new RedBlackTreeNode();
+	nil->color = BLACK;
+	nil->parent = nil;
+	nil->left = nil;
+	nil->right = nil;
+	root = nil;
 }
 
 RedBlackTree::~RedBlackTree()
 {
 	deleteNode(root);
-	root = nullptr;
+	
+	nil->color = BLACK;
+	nil->parent = nil;
+	nil->left = nil;
+	nil->right = nil;
+	root = nil;
 }
 
 void RedBlackTree::insertValue(int data)
 {
 	RedBlackTreeNode *node = new RedBlackTreeNode(data);
+	node->left = node->right = node->parent = nil;
+
 	root = insertBST(root, node);
 	fixInsertRBTree(node);
 }
@@ -51,30 +63,40 @@ RedBlackTreeNode * RedBlackTree::findValue(int data)
 
 void RedBlackTree::preorder()
 {
+	if (root == nil)
+		return;
+
 	preorderBST(root);
 	std::cout << "-------" << std::endl;
 }
 
 void RedBlackTree::inorder()
 {
+	if (root == nil)
+		return;
+
 	inorderBST(root);
 	std::cout << "-------" << std::endl;
 }
 
 void RedBlackTree::postorder()
 {
+	if (root == nil)
+		return;
+
 	postorderBST(root);
 	std::cout << "-------" << std::endl;
 }
 
 void RedBlackTree::displayTree()
 {
-	root->display();
+	if (root != nil)
+		root->display();
 }
 
 void RedBlackTree::deleteNode(RedBlackTreeNode *node)
 {
-	if (node == nullptr)
+	if (node == nil)
 		return;
 	deleteNode(node->left);
 	deleteNode(node->right);
@@ -86,12 +108,12 @@ void RedBlackTree::rotateLeft(RedBlackTreeNode *node)
 	RedBlackTreeNode *right_child = node->right;
 	node->right = right_child->left;
 
-	if (node->right != nullptr)
+	if (node->right != nil)
 		node->right->parent = node;
 
 	right_child->parent = node->parent;
 
-	if (node->parent == nullptr)
+	if (node->parent == nil)
 		root = right_child;
 	else if (node == node->parent->left)
 		node->parent->left = right_child;
@@ -107,12 +129,12 @@ void RedBlackTree::rotateRight(RedBlackTreeNode *node)
 	RedBlackTreeNode *left_child = node->left;
 	node->left = left_child->right;
 
-	if (node->left != nullptr)
+	if (node->left != nil)
 		node->left->parent = node;
 
 	left_child->parent = node->parent;
 
-	if (node->parent == nullptr)
+	if (node->parent == nil)
 		root = left_child;
 	else if (node == node->parent->left)
 		node->parent->left = left_child;
@@ -183,23 +205,23 @@ void RedBlackTree::fixInsertRBTree(RedBlackTreeNode *node)
 
 void RedBlackTree::fixDeleteRBTree(RedBlackTreeNode *node)
 {
-	if (node == nullptr)
+	if (node == nil)
 		return;
 
 	if (node == root)
 	{
-		root = nullptr;
+		root = nil;
 		return;
 	}
 
 	if (getColor(node) == RED || getColor(node->left) == RED || getColor(node->right) == RED)
 	{
-		RedBlackTreeNode *child = node->left != nullptr ? node->left : node->right;
+		RedBlackTreeNode *child = node->left != nil ? node->left : node->right;
 
 		if (node == node->parent->left)
 		{
 			node->parent->left = child;
-			if (child != nullptr)
+			if (child != nil)
 				child->parent = node->parent;
 			setColor(child, BLACK);
 			delete node;
@@ -207,7 +229,7 @@ void RedBlackTree::fixDeleteRBTree(RedBlackTreeNode *node)
 		else
 		{
 			node->parent->right = child;
-			if (child != nullptr)
+			if (child != nil)
 				child->parent = node->parent;
 			setColor(child, BLACK);
 			delete node;
@@ -298,9 +320,9 @@ void RedBlackTree::fixDeleteRBTree(RedBlackTreeNode *node)
 			}
 		}
 		if (node == node->parent->left)
-			node->parent->left = nullptr;
+			node->parent->left = nil;
 		else
-			node->parent->right = nullptr;
+			node->parent->right = nil;
 		delete(node);
 		setColor(root, BLACK);
 	}
@@ -308,7 +330,7 @@ void RedBlackTree::fixDeleteRBTree(RedBlackTreeNode *node)
 
 void RedBlackTree::preorderBST(RedBlackTreeNode *node)
 {
-	if (node == nullptr)
+	if (node == nil)
 		return;
 
 	if (node->color == RED)
@@ -325,7 +347,7 @@ void RedBlackTree::preorderBST(RedBlackTreeNode *node)
 
 void RedBlackTree::inorderBST(RedBlackTreeNode *node)
 {
-	if (node == nullptr)
+	if (node == nil)
 		return;
 
 	inorderBST(node->left);
@@ -343,7 +365,7 @@ void RedBlackTree::inorderBST(RedBlackTreeNode *node)
 
 void RedBlackTree::postorderBST(RedBlackTreeNode *node)
 {
-	if (node == nullptr)
+	if (node == nil)
 		return;
 
 	postorderBST(node->left);
@@ -362,7 +384,7 @@ void RedBlackTree::postorderBST(RedBlackTreeNode *node)
 
 int RedBlackTree::getColor(RedBlackTreeNode *node)
 {
-	if (node == nullptr)
+	if (node == nil)
 		return BLACK;
 
 	return node->color;
@@ -370,7 +392,7 @@ int RedBlackTree::getColor(RedBlackTreeNode *node)
 
 void RedBlackTree::setColor(RedBlackTreeNode *node, int color)
 {
-	if (node == nullptr)
+	if (node == nil)
 		return;
 
 	node->color = color;
@@ -380,7 +402,7 @@ RedBlackTreeNode * RedBlackTree::minValueNode(RedBlackTreeNode *node)
 {
 	RedBlackTreeNode *temp = node;
 
-	while (temp->left != nullptr)
+	while (temp->left != nil)
 		temp = temp->left;
 
 	return temp;
@@ -388,7 +410,7 @@ RedBlackTreeNode * RedBlackTree::minValueNode(RedBlackTreeNode *node)
 
 RedBlackTreeNode * RedBlackTree::insertBST(RedBlackTreeNode *root, RedBlackTreeNode *node)
 {
-	if (root == nullptr)
+	if (root == nil)
 		return node;
 
 	if (node->data < root->data)
@@ -407,7 +429,7 @@ RedBlackTreeNode * RedBlackTree::insertBST(RedBlackTreeNode *root, RedBlackTreeN
 
 RedBlackTreeNode * RedBlackTree::deleteBST(RedBlackTreeNode *root, int data)
 {
-	if (root == nullptr || root->left == nullptr || root->right == nullptr)
+	if (root == nil || root->left == nil || root->right == nil)
 		return root;
 
 	if (data < root->data)

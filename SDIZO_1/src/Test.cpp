@@ -10,7 +10,7 @@ void Test::getInputFile(std::string mainFolder)
 		cout << "Name of the file with input data: ";
 		cin >> inputData;
 
-		inputFile.open("../SDIZO_1/bin/Input/" + inputData);
+		inputFile.open("./Input/" + inputData);
 
 		if (!inputFile.is_open())
 			cout << "The file: " << inputData << " could not be opened" << endl;
@@ -24,7 +24,7 @@ void Test::getOutputFile(std::string mainFolder)
 		cout << "Name of the output file: ";
 		cin >> outputData;
 
-		outputFile.open("../SDIZO_1/bin/Output/" + mainFolder + "/" + outputData);
+		outputFile.open("./Output/" + mainFolder + "/" + outputData);
 
 		if (!outputFile.is_open())
 			cout << "The file: " << outputData << " could not be opened" << endl;

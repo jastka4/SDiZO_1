@@ -18,7 +18,7 @@ std::vector<std::string> getAllInputFilesWithoutExtension()
 	#endif
 
 	std::vector<std::string> files;
-	std::string path = "../SDIZO_1/bin/Input";
+	std::string path = "./Input";
 	for (auto & p : fs::directory_iterator(path))
 	{
 		auto path = p.path().string();
@@ -36,12 +36,12 @@ using namespace std;
 
 void FullTest::getInputFile(string inputData)
 {
-	inputFile.open("../SDIZO_1/bin/Input/" + inputData);
+	inputFile.open("./Input/" + inputData);
 }
 
 void FullTest::getOutputFile(string mainFolder, string outputData)
 {
-	outputFile.open("../SDIZO_1/bin/Output/" + mainFolder + "/" + outputData);
+	outputFile.open("./Output/" + mainFolder + "/" + outputData);
 }
 
 void FullTest::array()

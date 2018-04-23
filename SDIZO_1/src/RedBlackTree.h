@@ -4,6 +4,7 @@
 class RedBlackTree
 {
 	RedBlackTreeNode* root;
+	RedBlackTreeNode* nil;
 
 	void rotateLeft(RedBlackTreeNode*);
 	void rotateRight(RedBlackTreeNode*);

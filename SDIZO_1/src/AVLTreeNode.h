@@ -7,6 +7,7 @@ public:
 	AVLTreeNode* right;
 	int balance;
 
+	AVLTreeNode();
 	AVLTreeNode(int);
 	~AVLTreeNode();
 

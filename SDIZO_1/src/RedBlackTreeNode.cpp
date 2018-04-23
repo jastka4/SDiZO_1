@@ -3,6 +3,10 @@
 #include <iomanip>
 #include <windows.h> 
 
+RedBlackTreeNode::RedBlackTreeNode()
+{
+}
+
 RedBlackTreeNode::RedBlackTreeNode(int _data)
 {
 	data = _data;
@@ -18,6 +22,13 @@ RedBlackTreeNode::~RedBlackTreeNode()
 
 void RedBlackTreeNode::display(int offset)
 {
+	bool isNil = false;
+
+	if (this == this->left && this->left == this->right)
+		isNil = true;
+
+	if (isNil)
+		return;
 
 	if (right) right->display(5 + offset);
 	if (color == RED)

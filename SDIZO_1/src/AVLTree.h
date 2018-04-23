@@ -4,6 +4,7 @@
 class AVLTree
 {
 	AVLTreeNode *root;
+	AVLTreeNode *nil;
 
 	void preorderBST(AVLTreeNode*);
 	void inorderBST(AVLTreeNode*);
@@ -15,7 +16,6 @@ class AVLTree
 	bool decrementBalance(AVLTreeNode*&);
 	bool insertValue(int, AVLTreeNode*&);
 	bool removeValue(int, AVLTreeNode*&);
-	int getMax(AVLTreeNode*);
 	int getMin(AVLTreeNode*);
 public:
 	AVLTree();
