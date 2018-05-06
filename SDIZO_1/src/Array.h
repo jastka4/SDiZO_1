@@ -1,4 +1,7 @@
 #pragma once
+#include "IndexOutOfBoundsException.h"
+#include <iostream>
+
 class Array
 {
 	size_t size;

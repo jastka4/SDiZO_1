@@ -42,7 +42,7 @@ RedBlackTreeNode * RedBlackTree::findValue(int data)
 {
 	RedBlackTreeNode* node = root;
 
-	while (node)
+	while (node != nil)
 	{
 		if (node->data > data)
 		{

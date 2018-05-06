@@ -1,4 +1,5 @@
 #pragma once
+#include "FileNotFoundException.h"
 #include <iostream>
 #include <fstream>
 #include <istream>
@@ -13,8 +14,8 @@ protected:
 	std::ifstream inputFile;
 
 public:
-	void getInputFile(std::string mainFolder);
-	void getOutputFile(std::string mainFolder);
+	bool getInputFile(std::string mainFolder);
+	bool getOutputFile(std::string mainFolder);
 
 	virtual void array() = 0;
 	virtual void list() = 0;

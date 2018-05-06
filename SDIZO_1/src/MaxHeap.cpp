@@ -1,6 +1,4 @@
 #include "MaxHeap.h"
-#include <iostream>
-#include <iomanip>
 
 MaxHeap::MaxHeap()
 {
@@ -85,8 +83,7 @@ int MaxHeap::pop()
 {
 	if (size <= 0)
 	{
-		std::cout << "Heap is empty" << std::endl;
-		return -1;
+		throw IndexOutOfBoundsException("Heap is empty");
 	}
 	else if (size == 1)
 	{
@@ -108,7 +105,7 @@ void MaxHeap::remove(int value)
 	size_t key = find(value);
 	if (key == -1)
 	{
-		std::cout << "Could not find value: " << value << std::endl;
+		std::cout << "Could not remove value: " << value << std::endl;
 		return;
 	}
 

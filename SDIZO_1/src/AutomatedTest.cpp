@@ -12,8 +12,36 @@ using namespace std;
 
 void AutomatedTest::getInputOutputFiles(string mainFolder)
 {
-	getInputFile(mainFolder);
-	getOutputFile(mainFolder);
+	bool success = false;
+
+	do
+	{
+		try
+		{
+			success = getInputFile(mainFolder);
+		}
+		catch (FileNotFoundException ex)
+		{
+			cout << ex.what() << ". Filename: " << ex.getFile() << endl;
+			cout << "Press a key to try again..." << endl;
+			_getch();
+		}
+	} while (!success);
+
+	do
+	{
+		try
+		{
+			success = getOutputFile(mainFolder);
+		}
+		catch (FileNotFoundException ex)
+		{
+			cout << ex.what() << ". Filename: " << ex.getFile() << endl;
+			cout << "Press a key to try again..." << endl;
+
+			_getch();
+		}
+	} while (!success);	
 }
 
 void AutomatedTest::array()
@@ -55,9 +83,10 @@ void AutomatedTest::array()
 			end = true;
 			break;
 		case '1':
+			system("cls");
+
 			getInputOutputFiles(mainFile);
 
-			system("cls");
 			cout << "Automated test has been started...";
 
 			while (inputFile >> value)
@@ -72,9 +101,10 @@ void AutomatedTest::array()
 			_getch();
 			break;
 		case '2':
+			system("cls");
+
 			getInputOutputFiles(mainFile);
 
-			system("cls");
 			cout << "Automated test has been started...";
 
 			while (inputFile >> value)
@@ -89,17 +119,27 @@ void AutomatedTest::array()
 			_getch();
 			break;
 		case '3':
+			system("cls");
+
 			getInputOutputFiles(mainFile);
 
-			system("cls");
 			cout << "Automated test has been started...";
 
 			while (inputFile >> value)
 			{
-				position = array->getSize() == 0 ? 0 : rand() % array->getSize();
-				timer->start();
-				array->insertAt(position, value);
-				timer->stop();
+				try
+				{
+					position = array->getSize() == 0 ? 0 : rand() % array->getSize();
+					timer->start();
+					array->insertAt(position, value);
+					timer->stop();
+				}
+				catch (IndexOutOfBoundsException ex)
+				{
+					timer->stop();
+					array->insertAtEnd(value);
+				}
+
 				outputFile << timer->getTime() << endl;
 			}
 
@@ -107,16 +147,25 @@ void AutomatedTest::array()
 			_getch();
 			break;
 		case '4':
+			system("cls");
+
 			getInputOutputFiles(mainFile);
 
-			system("cls");
 			cout << "Automated test has been started...";
 
 			while (inputFile >> value)
 			{
-				timer->start();
-				array->removeAtBeggining();
-				timer->stop();
+				try
+				{
+					timer->start();
+					array->removeAtBeggining();
+					timer->stop();
+				}
+				catch (IndexOutOfBoundsException ex)
+				{
+					timer->stop();
+				}
+
 				outputFile << timer->getTime() << endl;
 			}
 
@@ -124,16 +173,26 @@ void AutomatedTest::array()
 			_getch();
 			break;
 		case '5':
+			system("cls");
+
 			getInputOutputFiles(mainFile);
 
-			system("cls");
 			cout << "Automated test has been started...";
 
 			while (inputFile >> value)
 			{
-				timer->start();
-				array->removeAtEnd();
-				timer->stop();
+				try
+				{
+					timer->start();
+					array->removeAtEnd();
+					timer->stop();
+				}
+				catch (IndexOutOfBoundsException ex)
+				{
+					timer->stop();
+					std::cout << ex.what() << std::endl;
+				}
+
 				outputFile << timer->getTime() << endl;
 			}
 
@@ -141,16 +200,26 @@ void AutomatedTest::array()
 			_getch();
 			break;
 		case '6':
+			system("cls");
+
 			getInputOutputFiles(mainFile);
 
-			system("cls");
 			cout << "Automated test has been started...";
 
 			while (inputFile >> value)
 			{
-				timer->start();
-				array->removeAt(rand() % array->getSize());
-				timer->stop();
+				try
+				{
+					timer->start();
+					array->removeAt(rand() % array->getSize());
+					timer->stop();
+				}
+				catch (IndexOutOfBoundsException ex)
+				{
+					timer->stop();
+					std::cout << ex.what() << std::endl;
+				}
+
 				outputFile << timer->getTime() << endl;
 			}
 
@@ -158,9 +227,10 @@ void AutomatedTest::array()
 			_getch();
 			break;
 		case '7':
+			system("cls");
+
 			getInputOutputFiles(mainFile);
 
-			system("cls");
 			cout << "Automated test has been started...";
 
 			while (inputFile >> value)
@@ -472,9 +542,18 @@ void AutomatedTest::heap()
 
 			while (inputFile >> value)
 			{
-				timer->start();
-				heap->pop();
-				timer->stop();
+				try
+				{
+					timer->start();
+					heap->pop();
+					timer->stop();
+				}
+				catch (IndexOutOfBoundsException ex)
+				{
+					timer->stop();
+					std::cout << ex.what() << std::endl;
+				}
+
 				outputFile << timer->getTime() << endl;
 			}
 
@@ -569,7 +648,7 @@ void AutomatedTest::RBTree()
 			<< "1. Insert element\n"
 			<< "2. Remove chosen element\n"
 			<< "3. Find an element\n"
-			<< "4. Display postorder\n"
+			<< "4. Display preorder\n"
 			<< "5. Display inorder\n"
 			<< "6. Display postorder\n"
 			<< "7. Display the tree\n"
@@ -713,7 +792,7 @@ void AutomatedTest::AVLTree()
 			<< "1. Insert element\n"
 			<< "2. Remove chosen element\n"
 			<< "3. Find an element\n"
-			<< "4. Display postorder\n"
+			<< "4. Display preorder\n"
 			<< "5. Display inorder\n"
 			<< "6. Display postorder\n"
 			<< "7. Display the tree\n"

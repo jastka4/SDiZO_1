@@ -8,7 +8,17 @@
 #include <iostream>
 #include <conio.h>
 
-using namespace std;
+void getUserInput(int &input, std::string type)
+{
+	std::cout << "Enter a " + type + ": ";
+	std::cin >> input;
+	while (std::cin.fail()) {
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		std::cout << "Bad entry. Enter a NUMBER: ";
+		std::cin >> input;
+	}
+}
 
 void ManualTest::array()
 {
@@ -17,6 +27,8 @@ void ManualTest::array()
 	int value,
 		position;
 
+	size_t index = -1;
+
 	Timer *timer = new Timer();
 
 	Array *array = new Array();
@@ -24,7 +36,7 @@ void ManualTest::array()
 	while (!end)
 	{
 		system("cls");
-		cout << "Choose an array function:\n"
+		std::cout << "Choose an array function:\n"
 			<< "1. Add to the beggining\n"
 			<< "2. Add to the end\n"
 			<< "3. Add at a chosen index\n"
@@ -48,77 +60,128 @@ void ManualTest::array()
 			break;
 		case '1':
 			system("cls");
-			cout << "Enter a value: ";
-			cin >> value;
+			
+			getUserInput(value, "value");
+
 			timer->start();
 			array->insertAtBeggining(value);
 			timer->stop();
-			cout << "Time of execution: " << timer->getTime() << " ns" << endl;
-			cout << '\n' << "Press a key to continue..." << endl;
+
+			std::cout << "Time of execution: " << timer->getTime() << " ns" << std::endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '2':
 			system("cls");
-			cout << "Enter a value: ";
-			cin >> value;
+			
+			getUserInput(value, "value");
+
 			timer->start();
 			array->insertAtEnd(value);
 			timer->stop();
-			cout << "Time of execution: " << timer->getTime() << " ns" << endl;
-			cout << '\n' << "Press a key to continue..." << endl;
+
+			std::cout << "Time of execution: " << timer->getTime() << " ns" << std::endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '3':
 			system("cls");
-			cout << "Enter a value: ";
-			cin >> value;
-			cout << "\nEnter a position: ";
-			cin >> position;
-			timer->start();
-			array->insertAt(position, value);
-			timer->stop();
-			cout << "Time of execution: " << timer->getTime() << " ns" << endl;
-			cout << '\n' << "Press a key to continue..." << endl;
+			
+			getUserInput(value, "value");
+			getUserInput(position, "position");
+			
+			try
+			{
+				timer->start();
+				array->insertAt(position, value);
+				timer->stop();
+			}
+			catch (IndexOutOfBoundsException ex)
+			{
+				timer->stop();
+				std::cout << ex.what() << std::endl;
+				array->insertAtEnd(value);
+				std::cout << "Inserted at the end of the array" << std::endl;
+			}
+
+			std::cout << "Time of execution: " << timer->getTime() << " ns" << std::endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '4':
 			system("cls");
-			timer->start();
-			array->removeAtBeggining();
-			timer->stop();
-			cout << "Time of execution: " << timer->getTime() << " ns" << endl;
-			cout << '\n' << "Press a key to continue..." << endl;
+
+			try
+			{
+				timer->start();
+				array->removeAtBeggining();
+				timer->stop();
+			}
+			catch (IndexOutOfBoundsException ex)
+			{
+				timer->stop();
+				std::cout << ex.what() << std::endl;
+			}
+
+			std::cout << "Time of execution: " << timer->getTime() << " ns" << std::endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '5':
 			system("cls");
-			timer->start();
-			array->removeAtEnd();
-			timer->stop();
-			cout << "Time of execution: " << timer->getTime() << " ns" << endl;
-			cout << '\n' << "Press a key to continue..." << endl;
+
+			try
+			{
+				timer->start();
+				array->removeAtEnd();
+				timer->stop();
+			}
+			catch (IndexOutOfBoundsException ex)
+			{
+				timer->stop();
+				std::cout << ex.what() << std::endl;
+			}
+
+			std::cout << "Time of execution: " << timer->getTime() << " ns" << std::endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '6':
 			system("cls");
-			cout << "\nEnter a position: ";
-			cin >> position;
-			timer->start();
-			array->removeAt(position);
-			timer->stop();
-			cout << "Time of execution: " << timer->getTime() << " ns" << endl;
-			cout << '\n' << "Press a key to continue..." << endl;
+
+			getUserInput(position, "position");
+
+			try
+			{
+				timer->start();
+				array->removeAt(position);
+				timer->stop();
+			}
+			catch (IndexOutOfBoundsException ex)
+			{
+				timer->stop();
+				std::cout << ex.what() << std::endl;
+			}
+
+			std::cout << "Time of execution: " << timer->getTime() << " ns" << std::endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '7':
 			system("cls");
-			cout << "Enter a value: ";
-			cin >> value;
+			
+			getUserInput(value, "value");
 			timer->start();
-			array->find(value);
+			index = array->find(value);
 			timer->stop();
-			cout << "Time of execution: " << timer->getTime() << " ns" << endl;
-			cout << '\n' << "Press a key to continue..." << endl;
+
+			if (index != -1)
+				std::cout << "Value found at: " << index << std::endl;
+			else
+				std::cout << "Value not found" << std::endl;
+
+			std::cout << "Time of execution: " << timer->getTime() << " ns" << std::endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '8':
@@ -126,14 +189,14 @@ void ManualTest::array()
 			timer->start();
 			array->display();
 			timer->stop();
-			cout << "Time of execution: " << timer->getTime() << " ns" << endl;
-			cout << '\n' << "Press a key to continue..." << endl;
+			std::cout << "Time of execution: " << timer->getTime() << " ns" << std::endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		default:
 				system("cls");
-				cout << "No option such as: " << choice << endl;
-				cout << '\n' << "Press a key to continue..." << endl;
+				std::cout << "No option such as: " << choice << std::endl;
+				std::cout << '\n' << "Press a key to continue..." << std::endl;
 				_getch();
 				break;
 		}
@@ -147,6 +210,8 @@ void ManualTest::list()
 	int value,
 		position;
 
+	DoublyLinkedNode* node = nullptr;
+
 	Timer *timer = new Timer();
 
 	DoublyLinkedList *list = new DoublyLinkedList();
@@ -154,7 +219,7 @@ void ManualTest::list()
 	while (!end)
 	{
 		system("cls");
-		cout << "Choose a list function:\n"
+		std::cout << "Choose a list function:\n"
 			<< "1. Add to the beggining\n"
 			<< "2. Add to the end\n"
 			<< "3. Add after a chosen index\n"
@@ -179,105 +244,125 @@ void ManualTest::list()
 			break;
 		case '1':
 			system("cls");
-			cout << "Enter a value: ";
-			cin >> value;
+			
+			getUserInput(value, "value");
+
 			timer->start();
 			list->insertAtBeggining(value);
 			timer->stop();
-			cout << "Time of execution: " << timer->getTime() << " ns" << endl;
-			cout << '\n' << "Press a key to continue..." << endl;
+
+			std::cout << "Time of execution: " << timer->getTime() << " ns" << std::endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '2':
 			system("cls");
-			cout << "Enter a value: ";
-			cin >> value;
+			
+			getUserInput(value, "value");
+
 			timer->start();
 			list->insertAtEnd(value);
 			timer->stop();
-			cout << "Time of execution: " << timer->getTime() << " ns" << endl;
-			cout << '\n' << "Press a key to continue..." << endl;
+
+			std::cout << "Time of execution: " << timer->getTime() << " ns" << std::endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '3':
 			system("cls");
-			cout << "Enter a value: ";
-			cin >> value;
-			cout << "\nEnter a position: ";
-			cin >> position;
+			
+			getUserInput(value, "value");
+			getUserInput(position, "position");
+
 			timer->start();
 			list->insertAfter(position, value);
 			timer->stop();
-			cout << "Time of execution: " << timer->getTime() << " ns" << endl;
-			cout << '\n' << "Press a key to continue..." << endl;
+
+			std::cout << "Time of execution: " << timer->getTime() << " ns" << std::endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '4':
 			system("cls");
-			cout << "Enter a value: ";
-			cin >> value;
-			cout << "\nEnter a position: ";
-			cin >> position;
+			
+			getUserInput(value, "value");
+			getUserInput(position, "position");
+
 			timer->start();
 			list->insertBefore(position, value);
 			timer->stop();
-			cout << "Time of execution: " << timer->getTime() << " ns" << endl;
-			cout << '\n' << "Press a key to continue..." << endl;
+
+			std::cout << "Time of execution: " << timer->getTime() << " ns" << std::endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '5':
 			system("cls");
+
 			timer->start();
 			list->removeAtBeggining();
 			timer->stop();
-			cout << "Time of execution: " << timer->getTime() << " ns" << endl;
-			cout << '\n' << "Press a key to continue..." << endl;
+
+			std::cout << "Time of execution: " << timer->getTime() << " ns" << std::endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '6':
 			system("cls");
+
 			timer->start();
 			list->removeAtEnd();
 			timer->stop();
-			cout << "Time of execution: " << timer->getTime() << " ns" << endl;
-			cout << '\n' << "Press a key to continue..." << endl;
+
+			std::cout << "Time of execution: " << timer->getTime() << " ns" << std::endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '7':
 			system("cls");
-			cout << "\nEnter a value to remove: ";
-			cin >> value;
+
+			std::cout << "\nEnter a value to remove: ";
+			getUserInput(value, "value");
 			timer->start();
 			list->remove(value);
 			timer->stop();
-			cout << "Time of execution: " << timer->getTime() << " ns" << endl;
-			cout << '\n' << "Press a key to continue..." << endl;
+
+			std::cout << "Time of execution: " << timer->getTime() << " ns" << std::endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '8':
 			system("cls");
-			cout << "Enter a value to find: ";
-			cin >> value;
+
+			getUserInput(value, "value to find");
 			timer->start();
-			list->find(value);
+			node = list->find(value);
 			timer->stop();
-			cout << "Time of execution: " << timer->getTime() << " ns" << endl;
-			cout << '\n' << "Press a key to continue..." << endl;
+
+			if (node != nullptr)
+				std::cout << "Value found" << std::endl;
+			else
+				std::cout << "Value not found" << std::endl;
+
+			std::cout << "Time of execution: " << timer->getTime() << " ns" << std::endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '9':
 			system("cls");
+
 			timer->start();
 			list->display();
 			timer->stop();
-			cout << "Time of execution: " << timer->getTime() << " ns" << endl;
-			cout << '\n' << "Press a key to continue..." << endl;
+
+			std::cout << "Time of execution: " << timer->getTime() << " ns" << std::endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		default:
 			system("cls");
-			cout << "No option such as: " << choice << endl;
-			cout << '\n' << "Press a key to continue..." << endl;
+			std::cout << "No option such as: " << choice << std::endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		}
@@ -290,6 +375,8 @@ void ManualTest::heap()
 	char choice;
 	int value;
 
+	size_t index = -1;
+
 	Timer *timer = new Timer();
 
 	MaxHeap *heap = new MaxHeap();
@@ -297,7 +384,7 @@ void ManualTest::heap()
 	while (!end)
 	{
 		system("cls");
-		cout << "Choose a max heap function:\n"
+		std::cout << "Choose a max heap function:\n"
 			<< "1. Push element\n"
 			<< "2. Pop element \n"
 			<< "3. Remove chosen element\n"
@@ -319,68 +406,92 @@ void ManualTest::heap()
 			break;
 		case '1':
 			system("cls");
-			cout << "Enter a value: ";
-			cin >> value;
+			
+			getUserInput(value, "value");
+
 			timer->start();
 			heap->push(value);
 			timer->stop();
-			cout << "Time of execution: " << timer->getTime() << " ns" << endl;
-			cout << '\n' << "Press a key to continue..." << endl;
+
+			std::cout << "Time of execution: " << timer->getTime() << " ns" << std::endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '2':
 			system("cls");
-			timer->start();
-			heap->pop();
-			timer->stop();
-			cout << "Time of execution: " << timer->getTime() << " ns" << endl;
-			cout << '\n' << "Press a key to continue..." << endl;
+
+			try
+			{
+				timer->start();
+				heap->pop();
+				timer->stop();
+			}
+			catch (IndexOutOfBoundsException ex)
+			{
+				timer->stop();
+				std::cout << ex.what() << std::endl;
+			}
+
+			std::cout << "Time of execution: " << timer->getTime() << " ns" << std::endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '3':
 			system("cls");
-			cout << "Enter a value to remove: ";
-			cin >> value;
+
+			getUserInput(value, "value to remove");
+
 			timer->start();
 			heap->remove(value);
 			timer->stop();
-			cout << "Time of execution: " << timer->getTime() << " ns" << endl;
-			cout << '\n' << "Press a key to continue..." << endl;
+
+			std::cout << "Time of execution: " << timer->getTime() << " ns" << std::endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '4':
 			system("cls");
-			cout << "Enter a value to find: ";
-			cin >> value;
+			getUserInput(value, "value to find");
+
 			timer->start();
-			heap->find(value);
+			index = heap->find(value);
 			timer->stop();
-			cout << "Time of execution: " << timer->getTime() << " ns" << endl;
-			cout << '\n' << "Press a key to continue..." << endl;
+
+			if (index != -1)
+				std::cout << "Value found at: " << index << std::endl;
+			else
+				std::cout << "Value not found" << std::endl;
+
+			std::cout << "Time of execution: " << timer->getTime() << " ns" << std::endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '5':
 			system("cls");
+
 			timer->start();
 			heap->display();
 			timer->stop();
-			cout << "Time of execution: " << timer->getTime() << " ns" << endl;
-			cout << '\n' << "Press a key to continue..." << endl;
+
+			std::cout << "Time of execution: " << timer->getTime() << " ns" << std::endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '6':
 			system("cls");
+
 			timer->start();
 			heap->displayTree();
 			timer->stop();
-			cout << "Time of execution: " << timer->getTime() << " ns" << endl;
-			cout << '\n' << "Press a key to continue..." << endl;
+
+			std::cout << "Time of execution: " << timer->getTime() << " ns" << std::endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		default:
 			system("cls");
-			cout << "No option such as: " << choice << endl;
-			cout << '\n' << "Press a key to continue..." << endl;
+			std::cout << "No option such as: " << choice << std::endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		}
@@ -393,6 +504,8 @@ void ManualTest::RBTree()
 	char choice;
 	int value;
 
+	RedBlackTreeNode* node = nullptr;
+
 	Timer *timer = new Timer();
 
 	RedBlackTree *tree = new RedBlackTree();
@@ -400,11 +513,11 @@ void ManualTest::RBTree()
 	while (!end)
 	{
 		system("cls");
-		cout << "Choose a red-black tree function:\n"
+		std::cout << "Choose a red-black tree function:\n"
 			<< "1. Insert element\n"
 			<< "2. Remove chosen element\n"
 			<< "3. Find an element\n"
-			<< "4. Display postorder\n"
+			<< "4. Display preorder\n"
 			<< "5. Display inorder\n"
 			<< "6. Display postorder\n"
 			<< "7. Display the tree\n"
@@ -423,77 +536,96 @@ void ManualTest::RBTree()
 			break;
 		case '1':
 			system("cls");
-			cout << "Enter a value: ";
-			cin >> value;
+			
+			getUserInput(value, "value");
+
 			timer->start();
 			tree->insertValue(value);
 			timer->stop();
-			cout << "Time of execution: " << timer->getTime() << " ns" << endl;
-			cout << '\n' << "Press a key to continue..." << endl;
+
+			std::cout << "Time of execution: " << timer->getTime() << " ns" << std::endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '2':
 			system("cls");
-			cout << "Enter a value to remove: ";
-			cin >> value;
+
+			getUserInput(value, "value to remove");
+
 			timer->start();
 			tree->deleteValue(value);
 			timer->stop();
-			cout << "Time of execution: " << timer->getTime() << " ns" << endl;
-			cout << '\n' << "Press a key to continue..." << endl;
+
+			std::cout << "Time of execution: " << timer->getTime() << " ns" << std::endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '3':
 			system("cls");
-			cout << "Enter a value to find: ";
-			cin >> value;
+
+			getUserInput(value, "value to find");
+
 			timer->start();
-			tree->findValue(value);
+			node = tree->findValue(value);
 			timer->stop();
-			cout << "Time of execution: " << timer->getTime() << " ns" << endl;
-			cout << '\n' << "Press a key to continue..." << endl;
+
+			if (node != nullptr)
+				std::cout << "Value found" << std::endl;
+			else
+				std::cout << "Value not found" << std::endl;
+
+			std::cout << "Time of execution: " << timer->getTime() << " ns" << std::endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '4':
 			system("cls");
+
 			timer->start();
 			tree->preorder();
 			timer->stop();
-			cout << "Time of execution: " << timer->getTime() << " ns" << endl;
-			cout << '\n' << "Press a key to continue..." << endl;
+
+			std::cout << "Time of execution: " << timer->getTime() << " ns" << std::endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '5':
 			system("cls");
+
 			timer->start();
 			tree->inorder();
 			timer->stop();
-			cout << "Time of execution: " << timer->getTime() << " ns" << endl;
-			cout << '\n' << "Press a key to continue..." << endl;
+
+			std::cout << "Time of execution: " << timer->getTime() << " ns" << std::endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '6':
 			system("cls");
+
 			timer->start();
 			tree->postorder();
 			timer->stop();
-			cout << "Time of execution: " << timer->getTime() << " ns" << endl;
-			cout << '\n' << "Press a key to continue..." << endl;
+
+			std::cout << "Time of execution: " << timer->getTime() << " ns" << std::endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '7':
 			system("cls");
+
 			timer->start();
 			tree->displayTree();
 			timer->stop();
-			cout << "Time of execution: " << timer->getTime() << " ns" << endl;
-			cout << '\n' << "Press a key to continue..." << endl;
+
+			std::cout << "Time of execution: " << timer->getTime() << " ns" << std::endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		default:
 			system("cls");
-			cout << "No option such as: " << choice << endl;
-			cout << '\n' << "Press a key to continue..." << endl;
+			std::cout << "No option such as: " << choice << std::endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		}
@@ -506,6 +638,8 @@ void ManualTest::AVLTree()
 	char choice;
 	int value;
 
+	AVLTreeNode* node = nullptr;
+
 	Timer *timer = new Timer();
 
 	::AVLTree *tree = new ::AVLTree();
@@ -513,11 +647,11 @@ void ManualTest::AVLTree()
 	while (!end)
 	{
 		system("cls");
-		cout << "Choose an AVL tree function:\n"
+		std::cout << "Choose an AVL tree function:\n"
 			<< "1. Insert element\n"
 			<< "2. Remove chosen element\n"
 			<< "3. Find an element\n"
-			<< "4. Display postorder\n"
+			<< "4. Display preorder\n"
 			<< "5. Display inorder\n"
 			<< "6. Display postorder\n"
 			<< "7. Display the tree\n"
@@ -536,77 +670,96 @@ void ManualTest::AVLTree()
 			break;
 		case '1':
 			system("cls");
-			cout << "Enter a value: ";
-			cin >> value;
+			
+			getUserInput(value, "value");
+
 			timer->start();
 			tree->insertValue(value);
 			timer->stop();
-			cout << "Time of execution: " << timer->getTime() << " ns" << endl;
-			cout << '\n' << "Press a key to continue..." << endl;
+
+			std::cout << "Time of execution: " << timer->getTime() << " ns" << std::endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '2':
 			system("cls");
-			cout << "Enter a value to remove: ";
-			cin >> value;
+
+			getUserInput(value, "value to remove");
+
 			timer->start();
 			tree->removeValue(value);
 			timer->stop();
-			cout << "Time of execution: " << timer->getTime() << " ns" << endl;
-			cout << '\n' << "Press a key to continue..." << endl;
+
+			std::cout << "Time of execution: " << timer->getTime() << " ns" << std::endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '3':
 			system("cls");
-			cout << "Enter a value to find: ";
-			cin >> value;
+
+			getUserInput(value, "value to find");
+
 			timer->start();
-			tree->findValue(value);
+			node = tree->findValue(value);
 			timer->stop();
-			cout << "Time of execution: " << timer->getTime() << " ns" << endl;
-			cout << '\n' << "Press a key to continue..." << endl;
+
+			if (node != nullptr)
+				std::cout << "Value found" << std::endl;
+			else
+				std::cout << "Value not found" << std::endl;
+
+			std::cout << "Time of execution: " << timer->getTime() << " ns" << std::endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '4':
 			system("cls");
+
 			timer->start();
 			tree->preorder();
 			timer->stop();
-			cout << "Time of execution: " << timer->getTime() << " ns" << endl;
-			cout << '\n' << "Press a key to continue..." << endl;
+
+			std::cout << "Time of execution: " << timer->getTime() << " ns" << std::endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '5':
 			system("cls");
+
 			timer->start();
 			tree->inorder();
 			timer->stop();
-			cout << "Time of execution: " << timer->getTime() << " ns" << endl;
-			cout << '\n' << "Press a key to continue..." << endl;
+
+			std::cout << "Time of execution: " << timer->getTime() << " ns" << std::endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '6':
 			system("cls");
+
 			timer->start();
 			tree->postorder();
 			timer->stop();
-			cout << "Time of execution: " << timer->getTime() << " ns" << endl;
-			cout << '\n' << "Press a key to continue..." << endl;
+
+			std::cout << "Time of execution: " << timer->getTime() << " ns" << std::endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '7':
 			system("cls");
+
 			timer->start();
 			tree->displayTree();
 			timer->stop();
-			cout << "Time of execution: " << timer->getTime() << " ns" << endl;
-			cout << '\n' << "Press a key to continue..." << endl;
+
+			std::cout << "Time of execution: " << timer->getTime() << " ns" << std::endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		default:
 			system("cls");
-			cout << "No option such as: " << choice << endl;
-			cout << '\n' << "Press a key to continue..." << endl;
+			std::cout << "No option such as: " << choice << std::endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		}

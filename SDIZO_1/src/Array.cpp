@@ -1,5 +1,4 @@
 #include "Array.h"
-#include <iostream>
 
 Array::Array()
 {
@@ -55,8 +54,7 @@ void Array::insertAt(size_t index, int data)
 {
 	if (index >= size)
 	{
-		std::cout << "Index is bigger than the size. Inserted at the end of the array" << std::endl;
-		insertAtEnd(data);
+		throw IndexOutOfBoundsException("Index is bigger than the size");
 	}
 	else
 	{
@@ -73,10 +71,10 @@ void Array::insertAt(size_t index, int data)
 void Array::removeAt(size_t index)
 {
 	if (size == 0)
-		std::cout << "Array is empty. Cannot remove element" << std::endl;
+		throw IndexOutOfBoundsException("Array is empty");
 	else if (index >= size)
 	{
-		std::cout << "Index is bigger than the size. Cannot remove element" << std::endl;
+		throw IndexOutOfBoundsException("Index is bigger than the size");
 	}
 	else
 	{
@@ -92,7 +90,7 @@ void Array::removeAt(size_t index)
 void Array::removeAtBeggining()
 {
 	if (size == 0)
-		std::cout << "Array is empty. Cannot remove element" << std::endl;
+		throw IndexOutOfBoundsException("Array is empty");
 	else
 	{
 		for (size_t i = 0; i < size - 1; i++)
@@ -107,7 +105,7 @@ void Array::removeAtBeggining()
 void Array::removeAtEnd()
 {
 	if (size == 0)
-		std::cout << "Array is empty. Cannot remove element" << std::endl;
+		throw IndexOutOfBoundsException("Array is empty");
 	else
 	{
 		array[size - 1] = 0;

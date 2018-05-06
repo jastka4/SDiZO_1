@@ -1,4 +1,8 @@
 #pragma once
+#include "IndexOutOfBoundsException.h"
+#include <iostream>
+#include <iomanip>
+
 class MaxHeap
 {
 	int *heap;

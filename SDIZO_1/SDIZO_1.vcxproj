@@ -166,7 +166,9 @@
     <ClInclude Include="src\AVLTreeNode.h" />
     <ClInclude Include="src\DoublyLinkedList.h" />
     <ClInclude Include="src\DoublyLinkedNode.h" />
+    <ClInclude Include="src\FileNotFoundException.h" />
     <ClInclude Include="src\FullTest.h" />
+    <ClInclude Include="src\IndexOutOfBoundsException.h" />
     <ClInclude Include="src\ManualTest.h" />
     <ClInclude Include="src\MaxHeap.h" />
     <ClInclude Include="src\Test.h" />

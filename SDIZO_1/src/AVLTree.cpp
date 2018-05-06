@@ -6,8 +6,8 @@ AVLTree::AVLTree()
 	nil = new AVLTreeNode();
 	nil->left = nil;
 	nil->right = nil;
-	root = nil;
 	nil->balance = 0;
+	root = nil;
 }
 
 AVLTree::~AVLTree()
@@ -35,8 +35,8 @@ void AVLTree::deleteNode(AVLTreeNode *&node)
 
 	deleteNode(node->left);
 	deleteNode(node->right);
+
 	delete node;
-	node = nil;
 }
 
 void AVLTree::rotateRight(AVLTreeNode *&node)
@@ -119,7 +119,7 @@ bool AVLTree::decrementBalance(AVLTreeNode *&node)
 
 bool AVLTree::insertValue(int data, AVLTreeNode *&node)
 {
-	if(node == nil)
+	if (node == nil)
 	{
 		node = new AVLTreeNode(data);
 		node->left = nil;
@@ -135,12 +135,17 @@ bool AVLTree::insertValue(int data, AVLTreeNode *&node)
 		return insertValue(data, node->left) && decrementBalance(node);
 	}
 
-	return false; // no need to add already existing node
+	return false;
 }
 
 int AVLTree::getMin(AVLTreeNode *node)
 {
-	return node->left == nil ? node->data : getMin(node->left);
+	AVLTreeNode *temp = node;
+
+	while (temp->left != nil)
+		temp = temp->left;
+
+	return temp->data;
 }
 
 bool AVLTree::removeValue(int data, AVLTreeNode *&node)
@@ -151,23 +156,23 @@ bool AVLTree::removeValue(int data, AVLTreeNode *&node)
 		return removeValue(data, node->right) && decrementBalance(node);
 	else if (node->data > data)
 		return removeValue(data, node->left) && incrementBalance(node);
-	else // if (node->value == item)
+	else
 	{
 		if (node->left == nil && node->right == nil)
-			deleteNode(node);
+		{
+			AVLTreeNode *nodeToRemove = node;
+			node = nil;
+			deleteNode(nodeToRemove);
+		}
 		else if (node->left != nil && node->right != nil)
 		{
-			// NOTE: "node" is reference to pointer, that can be
-			//  changed during new remove. It is necessary to
-			//  create another local pointer that cannot be changed
-			//  form outside, to point current node.
 			AVLTreeNode *currentNode = node;
 			int minNodeValue = getMin(node->right);
 
-			bool changedHeight = removeValue(minNodeValue, node);
+			bool isHeightChanged = removeValue(minNodeValue, node);
 			currentNode->data = minNodeValue;
 
-			return changedHeight;
+			return isHeightChanged;
 		}
 		else
 		{
@@ -191,11 +196,11 @@ bool AVLTree::removeValue(int data, AVLTreeNode *&node)
 	}
 }
 
-AVLTreeNode * AVLTree::findValue(int data)
+AVLTreeNode* AVLTree::findValue(int data)
 {
 	AVLTreeNode* node = root;
 
-	while (node)
+	while (node != nil)
 	{
 		if (node->data > data)
 		{
@@ -214,6 +219,11 @@ AVLTreeNode * AVLTree::findValue(int data)
 	return nullptr;
 }
 
+void AVLTree::preorder()
+{
+	preorderBST(root);
+}
+
 void AVLTree::preorderBST(AVLTreeNode *node)
 {
 	if (node == nil)
@@ -222,6 +232,11 @@ void AVLTree::preorderBST(AVLTreeNode *node)
 	std::cout << node->data << std::endl;
 	preorderBST(node->left);
 	preorderBST(node->right);
+}
+
+void AVLTree::inorder()
+{
+	inorderBST(root);
 }
 
 void AVLTree::inorderBST(AVLTreeNode *node)
@@ -234,6 +249,11 @@ void AVLTree::inorderBST(AVLTreeNode *node)
 	inorderBST(node->right);
 }
 
+void AVLTree::postorder()
+{
+	postorderBST(root);
+}
+
 void AVLTree::postorderBST(AVLTreeNode *node)
 {
 	if (node == nil)
@@ -244,23 +264,8 @@ void AVLTree::postorderBST(AVLTreeNode *node)
 	std::cout << node->data << std::endl;
 }
 
-void AVLTree::preorder()
-{
-	preorderBST(root);
-}
-
-void AVLTree::inorder()
-{
-	AVLTree(root);
-}
-
-void AVLTree::postorder()
-{
-	postorderBST(root);
-}
-
 void AVLTree::displayTree()
 {
 	if (root != nil)
-	root->display();
+		root->display();
 }

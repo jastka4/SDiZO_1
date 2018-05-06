@@ -37,11 +37,17 @@ using namespace std;
 void FullTest::getInputFile(string inputData)
 {
 	inputFile.open("./Input/" + inputData);
+
+	if (!inputFile.is_open())
+		throw FileNotFoundException("The file could not be opened", inputData.c_str());
 }
 
 void FullTest::getOutputFile(string mainFolder, string outputData)
 {
 	outputFile.open("./Output/" + mainFolder + "/" + outputData);
+
+	if (!outputFile.is_open())
+		throw FileNotFoundException("The file could not be created", outputData.c_str());
 }
 
 void FullTest::array()
@@ -88,9 +94,17 @@ void FullTest::array()
 
 	while (inputFile >> value)
 	{
-		timer->start();
-		array->removeAtBeggining();
-		timer->stop();
+		try
+		{
+			timer->start();
+			array->removeAtBeggining();
+			timer->stop();
+		}
+		catch (IndexOutOfBoundsException ex)
+		{
+			timer->stop();
+		}
+
 		outputFile << timer->getTime() << endl;
 	}
 
@@ -116,9 +130,18 @@ void FullTest::array()
 
 	while (inputFile >> value)
 	{
-		timer->start();
-		array->removeAtEnd();
-		timer->stop();
+		try
+		{
+			timer->start();
+			array->removeAtEnd();
+			timer->stop();
+		}
+		catch (IndexOutOfBoundsException ex)
+		{
+			timer->stop();
+			std::cout << ex.what() << std::endl;
+		}
+
 		outputFile << timer->getTime() << endl;
 	}
 
@@ -131,9 +154,18 @@ void FullTest::array()
 	while (inputFile >> value)
 	{
 		position = array->getSize() == 0 ? 0 : rand() % array->getSize();
-		timer->start();
-		array->insertAt(position, value);
-		timer->stop();
+
+		try
+		{
+			timer->start();
+			array->insertAt(position, value);
+			timer->stop();
+		}
+		catch (IndexOutOfBoundsException ex)
+		{
+			timer->stop();
+			array->insertAtEnd(value);
+		}
 		outputFile << timer->getTime() << endl;
 	}
 
@@ -145,9 +177,17 @@ void FullTest::array()
 
 	while (inputFile >> value)
 	{
-		timer->start();
-		array->removeAt(rand() % array->getSize());
-		timer->stop();
+		try
+		{
+			timer->start();
+			array->removeAt(rand() % array->getSize());
+			timer->stop();
+		}
+		catch (IndexOutOfBoundsException ex)
+		{
+			timer->stop();
+		}
+
 		outputFile << timer->getTime() << endl;
 	}
 
@@ -328,9 +368,16 @@ void FullTest::heap()
 
 	while (inputFile >> value)
 	{
-		timer->start();
-		heap->pop();
-		timer->stop();
+		try
+		{
+			timer->start();
+			heap->pop();
+			timer->stop();
+		}
+		catch (IndexOutOfBoundsException ex)
+		{
+			timer->stop();
+		}
 		outputFile << timer->getTime() << endl;
 	}
 
@@ -489,8 +536,18 @@ void FullTest::performFullTest()
 	vector<string> files = getAllInputFilesWithoutExtension();
 	for (auto const& file : files)
 	{
-		getInputFile(file);
+		try
+		{
+			getInputFile(file);
+		}
+		catch (FileNotFoundException ex)
+		{
+			cout << ex.what() << ". Filename: " << ex.getFile() << endl;
+			return;
+		}
+
 		inputData = removeExtension(file);
+
 		cout << "\nAmout of elements " << inputData << ":\n"
 			<< "----------------------------\n";
 		cout << "\nArray:\n";

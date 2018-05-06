@@ -1,7 +1,7 @@
 #pragma once
+#include "Test.h"
 #include <iostream>
 #include <fstream>
-#include "Test.h"
 
 class AutomatedTest :
 	public Test
