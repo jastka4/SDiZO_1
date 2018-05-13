@@ -153,9 +153,9 @@ bool AVLTree::removeValue(int data, AVLTreeNode *&node)
 	if (node == nil)
 		return false;
 	else if (node->data < data)
-		return removeValue(data, node->right) && decrementBalance(node);
+		return removeValue(data, node->right) && !decrementBalance(node);
 	else if (node->data > data)
-		return removeValue(data, node->left) && incrementBalance(node);
+		return removeValue(data, node->left) && !incrementBalance(node);
 	else
 	{
 		if (node->left == nil && node->right == nil)
