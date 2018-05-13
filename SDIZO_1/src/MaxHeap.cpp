@@ -168,5 +168,6 @@ void MaxHeap::display(int index, int offset)
 
 void MaxHeap::displayTree()
 {
+	if (size != 0)
 		display(0, 0);
 }

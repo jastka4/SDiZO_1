@@ -111,6 +111,8 @@ void DoublyLinkedList::remove(int data)
 			delete node;
 		}
 	}
+	else
+		std::cout << "List is empty\n";
 }
 
 void DoublyLinkedList::removeAtBeggining()
@@ -126,6 +128,8 @@ void DoublyLinkedList::removeAtBeggining()
 		if (firstNode == nullptr)
 			lastNode = firstNode;
 	}
+	else
+		std::cout << "List is empty\n";
 }
 
 void DoublyLinkedList::removeAtEnd()
@@ -141,6 +145,8 @@ void DoublyLinkedList::removeAtEnd()
 		if (lastNode == nullptr)
 			firstNode = lastNode;
 	}
+	else
+		std::cout << "List is empty\n";
 }
 
 DoublyLinkedNode* DoublyLinkedList::find(int data)
@@ -165,7 +171,7 @@ void DoublyLinkedList::display()
 	{
 		std::cout << "(Node: " << index++ << " Value: " << currentNode->data << ")";
 		if (currentNode != lastNode)
-			std::cout << " <-> ";
+			std::cout << "\n";
 		currentNode = currentNode->next;
 	}
 	std::cout << std::endl;

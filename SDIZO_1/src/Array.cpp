@@ -130,7 +130,7 @@ void Array::display()
 	{
 		std::cout << "[Index: " << i << " Value: " << array[i] << "]";
 		if (i != size - 1)
-			std::cout << ", ";
+			std::cout << "\n";
 	}
 	std::cout << std::endl;
 }
