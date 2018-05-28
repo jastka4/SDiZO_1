@@ -429,7 +429,7 @@ RedBlackTreeNode * RedBlackTree::insertBST(RedBlackTreeNode *root, RedBlackTreeN
 
 RedBlackTreeNode * RedBlackTree::deleteBST(RedBlackTreeNode *root, int data)
 {
-	if (root == nil || root->left == nil || root->right == nil)
+	if (root == nil)
 		return root;
 
 	if (data < root->data)
@@ -437,6 +437,9 @@ RedBlackTreeNode * RedBlackTree::deleteBST(RedBlackTreeNode *root, int data)
 
 	if (data > root->data)
 		return deleteBST(root->right, data);
+
+	if (root->left == nil || root->right == nil)
+		return root;
 
 	RedBlackTreeNode *temp = minValueNode(root->right);
 	root->data = temp->data;

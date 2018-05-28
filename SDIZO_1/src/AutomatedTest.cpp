@@ -8,9 +8,7 @@
 #include <iostream>
 #include <conio.h>
 
-using namespace std;
-
-void AutomatedTest::getInputOutputFiles(string mainFolder)
+void AutomatedTest::getInputOutputFiles(std::string mainFolder)
 {
 	bool success = false;
 
@@ -18,13 +16,16 @@ void AutomatedTest::getInputOutputFiles(string mainFolder)
 	{
 		try
 		{
-			success = getInputFile(mainFolder);
+			success = getInputFile();
 		}
 		catch (FileNotFoundException ex)
 		{
-			cout << ex.what() << ". Filename: " << ex.getFile() << endl;
-			cout << "Press a key to try again..." << endl;
+			std::cout << ex.what() << ". Filename: " << ex.getFile() << std::endl;
+			std::cout << "Press a key to try again..." << std::endl;
 			_getch();
+
+			if (GetAsyncKeyState(VK_ESCAPE))
+				return;
 		}
 	} while (!success);
 
@@ -36,12 +37,15 @@ void AutomatedTest::getInputOutputFiles(string mainFolder)
 		}
 		catch (FileNotFoundException ex)
 		{
-			cout << ex.what() << ". Filename: " << ex.getFile() << endl;
-			cout << "Press a key to try again..." << endl;
+			std::cout << ex.what() << ". Filename: " << ex.getFile() << std::endl;
+			std::cout << "Press a key to try again..." << std::endl;
 
 			_getch();
+
+			if (GetAsyncKeyState(VK_ESCAPE))
+				return;
 		}
-	} while (!success);	
+	} while (!success);
 }
 
 void AutomatedTest::array()
@@ -51,7 +55,7 @@ void AutomatedTest::array()
 	int value,
 		position;
 
-	string mainFile = "Array";
+	std::string mainFile = "Array";
 
 	Timer *timer = new Timer();
 
@@ -60,7 +64,7 @@ void AutomatedTest::array()
 	while (!end)
 	{
 		system("cls");
-		cout << "Choose an array function:\n"
+		std::cout << "Choose an array function:\n"
 			<< "1. Add to the beggining\n"
 			<< "2. Add to the end\n"
 			<< "3. Add at a chosen index\n"
@@ -87,17 +91,17 @@ void AutomatedTest::array()
 
 			getInputOutputFiles(mainFile);
 
-			cout << "Automated test has been started...";
+			std::cout << "Automated test has been started...";
 
 			while (inputFile >> value)
 			{
 				timer->start();
 				array->insertAtBeggining(value);
 				timer->stop();
-				outputFile << timer->getTime() << endl;
+				outputFile << timer->getTime() << std::endl;
 			}
 
-			cout << '\n' << "Press a key to continue..." << endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '2':
@@ -105,17 +109,17 @@ void AutomatedTest::array()
 
 			getInputOutputFiles(mainFile);
 
-			cout << "Automated test has been started...";
+			std::cout << "Automated test has been started...";
 
 			while (inputFile >> value)
 			{
 				timer->start();
 				array->insertAtEnd(value);
 				timer->stop();
-				outputFile << timer->getTime() << endl;
+				outputFile << timer->getTime() << std::endl;
 			}
 
-			cout << '\n' << "Press a key to continue..." << endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '3':
@@ -123,7 +127,7 @@ void AutomatedTest::array()
 
 			getInputOutputFiles(mainFile);
 
-			cout << "Automated test has been started...";
+			std::cout << "Automated test has been started...";
 
 			while (inputFile >> value)
 			{
@@ -140,10 +144,10 @@ void AutomatedTest::array()
 					array->insertAtEnd(value);
 				}
 
-				outputFile << timer->getTime() << endl;
+				outputFile << timer->getTime() << std::endl;
 			}
 
-			cout << '\n' << "Press a key to continue..." << endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '4':
@@ -151,7 +155,7 @@ void AutomatedTest::array()
 
 			getInputOutputFiles(mainFile);
 
-			cout << "Automated test has been started...";
+			std::cout << "Automated test has been started...";
 
 			while (inputFile >> value)
 			{
@@ -166,10 +170,10 @@ void AutomatedTest::array()
 					timer->stop();
 				}
 
-				outputFile << timer->getTime() << endl;
+				outputFile << timer->getTime() << std::endl;
 			}
 
-			cout << '\n' << "Press a key to continue..." << endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '5':
@@ -177,7 +181,7 @@ void AutomatedTest::array()
 
 			getInputOutputFiles(mainFile);
 
-			cout << "Automated test has been started...";
+			std::cout << "Automated test has been started...";
 
 			while (inputFile >> value)
 			{
@@ -193,10 +197,10 @@ void AutomatedTest::array()
 					std::cout << ex.what() << std::endl;
 				}
 
-				outputFile << timer->getTime() << endl;
+				outputFile << timer->getTime() << std::endl;
 			}
 
-			cout << '\n' << "Press a key to continue..." << endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '6':
@@ -204,7 +208,7 @@ void AutomatedTest::array()
 
 			getInputOutputFiles(mainFile);
 
-			cout << "Automated test has been started...";
+			std::cout << "Automated test has been started...";
 
 			while (inputFile >> value)
 			{
@@ -220,10 +224,10 @@ void AutomatedTest::array()
 					std::cout << ex.what() << std::endl;
 				}
 
-				outputFile << timer->getTime() << endl;
+				outputFile << timer->getTime() << std::endl;
 			}
 
-			cout << '\n' << "Press a key to continue..." << endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '7':
@@ -231,17 +235,17 @@ void AutomatedTest::array()
 
 			getInputOutputFiles(mainFile);
 
-			cout << "Automated test has been started...";
+			std::cout << "Automated test has been started...";
 
 			while (inputFile >> value)
 			{
 				timer->start();
 				array->find(value);
 				timer->stop();
-				outputFile << timer->getTime() << endl;
+				outputFile << timer->getTime() << std::endl;
 			}
 
-			cout << '\n' << "Press a key to continue..." << endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '8':
@@ -250,15 +254,15 @@ void AutomatedTest::array()
 			timer->start();
 			array->display();
 			timer->stop();
-			cout << "\nTime of execution: " << timer->getTime() << " ns" << endl;
+			std::cout << "\nTime of execution: " << timer->getTime() << " ns" << std::endl;
 
-			cout << '\n' << "Press a key to continue..." << endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		default:
 			system("cls");
-			cout << "No option such as: " << choice << endl;
-			cout << '\n' << "Press a key to continue..." << endl;
+			std::cout << "No option such as: " << choice << std::endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		}
@@ -276,7 +280,7 @@ void AutomatedTest::list()
 	int value,
 		position;
 
-	string mainFile = "DLList";
+	std::string mainFile = "DLList";
 
 	Timer *timer = new Timer();
 
@@ -285,7 +289,7 @@ void AutomatedTest::list()
 	while (!end)
 	{
 		system("cls");
-		cout << "Choose a list function:\n"
+		std::cout << "Choose a list function:\n"
 			<< "1. Add to the beggining\n"
 			<< "2. Add to the end\n"
 			<< "3. Add after a chosen index\n"
@@ -312,41 +316,41 @@ void AutomatedTest::list()
 			getInputOutputFiles(mainFile);
 
 			system("cls");
-			cout << "Automated test has been started...";
+			std::cout << "Automated test has been started...";
 
 			while (inputFile >> value)
 			{
 				timer->start();
 				list->insertAtBeggining(value);
 				timer->stop();
-				outputFile << timer->getTime() << endl;
+				outputFile << timer->getTime() << std::endl;
 			}
 
-			cout << '\n' << "Press a key to continue..." << endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '2':
 			getInputOutputFiles(mainFile);
 
 			system("cls");
-			cout << "Automated test has been started...";
+			std::cout << "Automated test has been started...";
 
 			while (inputFile >> value)
 			{
 				timer->start();
 				list->insertAtEnd(value);
 				timer->stop();
-				outputFile << timer->getTime() << endl;
+				outputFile << timer->getTime() << std::endl;
 			}
 
-			cout << '\n' << "Press a key to continue..." << endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '3':
 			getInputOutputFiles(mainFile);
 
 			system("cls");
-			cout << "Automated test has been started...";
+			std::cout << "Automated test has been started...";
 
 			firstLine = true;
 
@@ -360,17 +364,17 @@ void AutomatedTest::list()
 				timer->start();
 				list->insertAfter(position, value);
 				timer->stop();
-				outputFile << timer->getTime() << endl;
+				outputFile << timer->getTime() << std::endl;
 			}
 
-			cout << '\n' << "Press a key to continue..." << endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '4':
 			getInputOutputFiles(mainFile);
 
 			system("cls");
-			cout << "Automated test has been started...";
+			std::cout << "Automated test has been started...";
 
 			firstLine = true;
 
@@ -384,78 +388,78 @@ void AutomatedTest::list()
 				timer->start();
 				list->insertBefore(position, value);
 				timer->stop();
-				outputFile << timer->getTime() << endl;
+				outputFile << timer->getTime() << std::endl;
 			}
 
-			cout << '\n' << "Press a key to continue..." << endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '5':
 			getInputOutputFiles(mainFile);
 
 			system("cls");
-			cout << "Automated test has been started...";
+			std::cout << "Automated test has been started...";
 
 			while (inputFile >> value)
 			{
 				timer->start();
 				list->removeAtBeggining();
 				timer->stop();
-				outputFile << timer->getTime() << endl;
+				outputFile << timer->getTime() << std::endl;
 			}
 
-			cout << '\n' << "Press a key to continue..." << endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '6':
 			getInputOutputFiles(mainFile);
 
 			system("cls");
-			cout << "Automated test has been started...";
+			std::cout << "Automated test has been started...";
 
 			while (inputFile >> value)
 			{
 				timer->start();
 				list->removeAtEnd();
 				timer->stop();
-				outputFile << timer->getTime() << endl;
+				outputFile << timer->getTime() << std::endl;
 			}
 
-			cout << '\n' << "Press a key to continue..." << endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '7':
 			getInputOutputFiles(mainFile);
 
 			system("cls");
-			cout << "Automated test has been started...";
+			std::cout << "Automated test has been started...";
 
 			while (inputFile >> value)
 			{
 				timer->start();
 				list->remove(value);
 				timer->stop();
-				outputFile << timer->getTime() << endl;
+				outputFile << timer->getTime() << std::endl;
 			}
 
-			cout << '\n' << "Press a key to continue..." << endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '8':
 			getInputOutputFiles(mainFile);
 
 			system("cls");
-			cout << "Automated test has been started...";
+			std::cout << "Automated test has been started...";
 
 			while (inputFile >> value)
 			{
 				timer->start();
 				list->find(value);
 				timer->stop();
-				outputFile << timer->getTime() << endl;
+				outputFile << timer->getTime() << std::endl;
 			}
 
-			cout << '\n' << "Press a key to continue..." << endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '9':
@@ -464,15 +468,15 @@ void AutomatedTest::list()
 			timer->start();
 			list->display();
 			timer->stop();
-			cout << "\nTime of execution: " << timer->getTime() << " ns" << endl;
+			std::cout << "\nTime of execution: " << timer->getTime() << " ns" << std::endl;
 
-			cout << '\n' << "Press a key to continue..." << endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		default:
 			system("cls");
-			cout << "No option such as: " << choice << endl;
-			cout << '\n' << "Press a key to continue..." << endl;
+			std::cout << "No option such as: " << choice << std::endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		}
@@ -488,7 +492,7 @@ void AutomatedTest::heap()
 	char choice;
 	int value;
 
-	string mainFile = "MaxHeap";
+	std::string mainFile = "MaxHeap";
 
 	Timer *timer = new Timer();
 
@@ -497,7 +501,7 @@ void AutomatedTest::heap()
 	while (!end)
 	{
 		system("cls");
-		cout << "Choose a max heap function:\n"
+		std::cout << "Choose a max heap function:\n"
 			<< "1. Push element\n"
 			<< "2. Pop element \n"
 			<< "3. Remove chosen element\n"
@@ -521,24 +525,24 @@ void AutomatedTest::heap()
 			getInputOutputFiles(mainFile);
 
 			system("cls");
-			cout << "Automated test has been started...";
+			std::cout << "Automated test has been started...";
 
 			while (inputFile >> value)
 			{
 				timer->start();
 				heap->push(value);
 				timer->stop();
-				outputFile << timer->getTime() << endl;
+				outputFile << timer->getTime() << std::endl;
 			}
 
-			cout << '\n' << "Press a key to continue..." << endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '2':
 			getInputOutputFiles(mainFile);
 
 			system("cls");
-			cout << "Automated test has been started...";
+			std::cout << "Automated test has been started...";
 
 			while (inputFile >> value)
 			{
@@ -554,44 +558,44 @@ void AutomatedTest::heap()
 					std::cout << ex.what() << std::endl;
 				}
 
-				outputFile << timer->getTime() << endl;
+				outputFile << timer->getTime() << std::endl;
 			}
 
-			cout << '\n' << "Press a key to continue..." << endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '3':
 			getInputOutputFiles(mainFile);
 
 			system("cls");
-			cout << "Automated test has been started...";
+			std::cout << "Automated test has been started...";
 
 			while (inputFile >> value)
 			{
 				timer->start();
 				heap->remove(value);
 				timer->stop();
-				outputFile << timer->getTime() << endl;
+				outputFile << timer->getTime() << std::endl;
 			}
 
-			cout << '\n' << "Press a key to continue..." << endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '4':
 			getInputOutputFiles(mainFile);
 
 			system("cls");
-			cout << "Automated test has been started...";
+			std::cout << "Automated test has been started...";
 
 			while (inputFile >> value)
 			{
 				timer->start();
 				heap->find(value);
 				timer->stop();
-				outputFile << timer->getTime() << endl;
+				outputFile << timer->getTime() << std::endl;
 			}
 
-			cout << '\n' << "Press a key to continue..." << endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '5':
@@ -600,9 +604,9 @@ void AutomatedTest::heap()
 			timer->start();
 			heap->display();
 			timer->stop();
-			cout << "\nTime of execution: " << timer->getTime() << " ns" << endl;
+			std::cout << "\nTime of execution: " << timer->getTime() << " ns" << std::endl;
 
-			cout << '\n' << "Press a key to continue..." << endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '6':
@@ -611,15 +615,15 @@ void AutomatedTest::heap()
 			timer->start();
 			heap->displayTree();
 			timer->stop();
-			cout << "\nTime of execution: " << timer->getTime() << " ns" << endl;
+			std::cout << "\nTime of execution: " << timer->getTime() << " ns" << std::endl;
 
-			cout << '\n' << "Press a key to continue..." << endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		default:
 			system("cls");
-			cout << "No option such as: " << choice << endl;
-			cout << '\n' << "Press a key to continue..." << endl;
+			std::cout << "No option such as: " << choice << std::endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		}
@@ -635,7 +639,7 @@ void AutomatedTest::RBTree()
 	char choice;
 	int value;
 
-	string mainFile = "RBTree";
+	std::string mainFile = "RBTree";
 
 	Timer *timer = new Timer();
 
@@ -644,7 +648,7 @@ void AutomatedTest::RBTree()
 	while (!end)
 	{
 		system("cls");
-		cout << "Choose a red-black tree function:\n"
+		std::cout << "Choose a red-black tree function:\n"
 			<< "1. Insert element\n"
 			<< "2. Remove chosen element\n"
 			<< "3. Find an element\n"
@@ -669,51 +673,51 @@ void AutomatedTest::RBTree()
 			getInputOutputFiles(mainFile);
 
 			system("cls");
-			cout << "Automated test has been started...";
+			std::cout << "Automated test has been started...";
 
 			while (inputFile >> value)
 			{
 				timer->start();
 				tree->insertValue(value);
 				timer->stop();
-				outputFile << timer->getTime() << endl;
+				outputFile << timer->getTime() << std::endl;
 			}
 
-			cout << '\n' << "Press a key to continue..." << endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '2':
 			getInputOutputFiles(mainFile);
 
 			system("cls");
-			cout << "Automated test has been started...";
+			std::cout << "Automated test has been started...";
 
 			while (inputFile >> value)
 			{
 				timer->start();
 				tree->deleteValue(value);
 				timer->stop();
-				outputFile << timer->getTime() << endl;
+				outputFile << timer->getTime() << std::endl;
 			}
 
-			cout << '\n' << "Press a key to continue..." << endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '3':
 			getInputOutputFiles(mainFile);
 
 			system("cls");
-			cout << "Automated test has been started...";
+			std::cout << "Automated test has been started...";
 
 			while (inputFile >> value)
 			{
 				timer->start();
 				tree->findValue(value);
 				timer->stop();
-				outputFile << timer->getTime() << endl;
+				outputFile << timer->getTime() << std::endl;
 			}
 
-			cout << '\n' << "Press a key to continue..." << endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '4':
@@ -722,9 +726,9 @@ void AutomatedTest::RBTree()
 			timer->start();
 			tree->preorder();
 			timer->stop();
-			cout << "\nTime of execution: " << timer->getTime() << " ns" << endl;
+			std::cout << "\nTime of execution: " << timer->getTime() << " ns" << std::endl;
 
-			cout << '\n' << "Press a key to continue..." << endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '5':
@@ -733,9 +737,9 @@ void AutomatedTest::RBTree()
 			timer->start();
 			tree->inorder();
 			timer->stop();
-			cout << "\nTime of execution: " << timer->getTime() << " ns" << endl;
+			std::cout << "\nTime of execution: " << timer->getTime() << " ns" << std::endl;
 
-			cout << '\n' << "Press a key to continue..." << endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '6':
@@ -744,9 +748,9 @@ void AutomatedTest::RBTree()
 			timer->start();
 			tree->postorder();
 			timer->stop();
-			cout << "\nTime of execution: " << timer->getTime() << " ns" << endl;
+			std::cout << "\nTime of execution: " << timer->getTime() << " ns" << std::endl;
 
-			cout << '\n' << "Press a key to continue..." << endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '7':
@@ -755,15 +759,15 @@ void AutomatedTest::RBTree()
 			timer->start();
 			tree->displayTree();
 			timer->stop();
-			cout << "\nTime of execution: " << timer->getTime() << " ns" << endl;
+			std::cout << "\nTime of execution: " << timer->getTime() << " ns" << std::endl;
 
-			cout << '\n' << "Press a key to continue..." << endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		default:
 			system("cls");
-			cout << "No option such as: " << choice << endl;
-			cout << '\n' << "Press a key to continue..." << endl;
+			std::cout << "No option such as: " << choice << std::endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		}
@@ -779,7 +783,7 @@ void AutomatedTest::AVLTree()
 	char choice;
 	int value;
 
-	string mainFile = "AVLTree";
+	std::string mainFile = "AVLTree";
 
 	Timer *timer = new Timer();
 
@@ -788,7 +792,7 @@ void AutomatedTest::AVLTree()
 	while (!end)
 	{
 		system("cls");
-		cout << "Choose an AVL tree function:\n"
+		std::cout << "Choose an AVL tree function:\n"
 			<< "1. Insert element\n"
 			<< "2. Remove chosen element\n"
 			<< "3. Find an element\n"
@@ -813,50 +817,50 @@ void AutomatedTest::AVLTree()
 			getInputOutputFiles(mainFile);
 
 			system("cls");
-			cout << "Automated test has been started...";
+			std::cout << "Automated test has been started...";
 
 			while (inputFile >> value)
 			{
 				timer->start();
 				tree->insertValue(value);
 				timer->stop();
-				outputFile << timer->getTime() << endl;
+				outputFile << timer->getTime() << std::endl;
 			}
 
-			cout << '\n' << "Press a key to continue..." << endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '2':
 			getInputOutputFiles(mainFile);
 			system("cls");
-			cout << "Automated test has been started...";
+			std::cout << "Automated test has been started...";
 
 			while (inputFile >> value)
 			{
 				timer->start();
 				tree->removeValue(value);
 				timer->stop();
-				outputFile << timer->getTime() << endl;
+				outputFile << timer->getTime() << std::endl;
 			}
 
-			cout << '\n' << "Press a key to continue..." << endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '3':
 			getInputOutputFiles(mainFile);
 
 			system("cls");
-			cout << "Automated test has been started...";
+			std::cout << "Automated test has been started...";
 
 			while (inputFile >> value)
 			{
 				timer->start();
 				tree->findValue(value);
 				timer->stop();
-				outputFile << timer->getTime() << endl;
+				outputFile << timer->getTime() << std::endl;
 			}
 
-			cout << '\n' << "Press a key to continue..." << endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '4':
@@ -865,9 +869,9 @@ void AutomatedTest::AVLTree()
 			timer->start();
 			tree->preorder();
 			timer->stop();
-			cout << "\nTime of execution: " << timer->getTime() << " ns" << endl;
+			std::cout << "\nTime of execution: " << timer->getTime() << " ns" << std::endl;
 
-			cout << '\n' << "Press a key to continue..." << endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '5':
@@ -876,9 +880,9 @@ void AutomatedTest::AVLTree()
 			timer->start();
 			tree->inorder();
 			timer->stop();
-			cout << "\nTime of execution: " << timer->getTime() << " ns" << endl;
+			std::cout << "\nTime of execution: " << timer->getTime() << " ns" << std::endl;
 
-			cout << '\n' << "Press a key to continue..." << endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '6':
@@ -887,9 +891,9 @@ void AutomatedTest::AVLTree()
 			timer->start();
 			tree->postorder();
 			timer->stop();
-			cout << "\nTime of execution: " << timer->getTime() << " ns" << endl;
+			std::cout << "\nTime of execution: " << timer->getTime() << " ns" << std::endl;
 
-			cout << '\n' << "Press a key to continue..." << endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		case '7':
@@ -898,15 +902,15 @@ void AutomatedTest::AVLTree()
 			timer->start();
 			tree->displayTree();
 			timer->stop();
-			cout << "\nTime of execution: " << timer->getTime() << " ns" << endl;
+			std::cout << "\nTime of execution: " << timer->getTime() << " ns" << std::endl;
 
-			cout << '\n' << "Press a key to continue..." << endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		default:
 			system("cls");
-			cout << "No option such as: " << choice << endl;
-			cout << '\n' << "Press a key to continue..." << endl;
+			std::cout << "No option such as: " << choice << std::endl;
+			std::cout << '\n' << "Press a key to continue..." << std::endl;
 			_getch();
 			break;
 		}
