@@ -4,6 +4,8 @@
 class ManualTest :
 	public Test
 {
+	bool askIfLoadFromFile();
+	void getInitialFile();
 public:
 	void array();
 	void list();

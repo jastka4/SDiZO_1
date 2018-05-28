@@ -8,21 +8,53 @@
 #include <iostream>
 #include <conio.h>
 
-void getUserInput(int &input, std::string type)
+bool ManualTest::askIfLoadFromFile()
 {
-	std::cout << "Enter a " + type + ": ";
-	std::cin >> input;
-	while (std::cin.fail()) {
-		std::cin.clear();
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		std::cout << "Bad entry. Enter a NUMBER: ";
-		std::cin >> input;
+	system("cls");
+
+	char choice = 0;
+
+	do
+	{
+		std::cout << "Load initial values from file(y/n): ";
+		choice = _getch();
+	} while (choice != 'y' && choice != 'n' && choice != '0' && choice != 27);
+
+	if (choice == 'y')
+	{
+		getInitialFile();
+		return true;
 	}
+
+	return false;
+}
+
+void ManualTest::getInitialFile()
+{
+	bool success = false;
+
+	do
+	{
+		try
+		{
+			success = getInputFile();
+		}
+		catch (FileNotFoundException ex)
+		{
+			std::cout << ex.what() << ". Filename: " << ex.getFile() << std::endl;
+			std::cout << "Press a key to try again..." << std::endl;
+			_getch();
+
+			if (GetAsyncKeyState(VK_ESCAPE))
+				return;
+		}
+	} while (!success);
 }
 
 void ManualTest::array()
 {
-	bool end = false;
+	bool end = false,
+		loadFromFile = false;
 	char choice;
 	int value,
 		position;
@@ -32,6 +64,17 @@ void ManualTest::array()
 	Timer *timer = new Timer();
 
 	Array *array = new Array();
+
+	loadFromFile = askIfLoadFromFile();
+	if (loadFromFile)
+	{
+		while (inputFile >> value)
+		{
+			array->insertAtEnd(value);
+		}
+	}
+
+	inputFile.close();
 
 	while (!end)
 	{
@@ -205,7 +248,8 @@ void ManualTest::array()
 
 void ManualTest::list()
 {
-	bool end = false;
+	bool end = false,
+		 loadFromFile = false;
 	char choice;
 	int value,
 		position;
@@ -216,19 +260,30 @@ void ManualTest::list()
 
 	DoublyLinkedList *list = new DoublyLinkedList();
 
+	loadFromFile = askIfLoadFromFile();
+	if (loadFromFile)
+	{
+		while (inputFile >> value)
+		{
+			list->insertAtEnd(value);
+		}
+	}
+
+	inputFile.close();
+
 	while (!end)
 	{
 		system("cls");
 		std::cout << "Choose a list function:\n"
 			<< "1. Add to the beggining\n"
 			<< "2. Add to the end\n"
-			<< "3. Add after a chosen index\n"
-			<< "4. Add before a chosen index\n"
+			<< "3. Add after a chosen element\n"
+			<< "4. Add before a chosen element\n"
 			<< "5. Remove first element \n"
 			<< "6. Remove last element \n"
 			<< "7. Remove chosen element\n"
 			<< "8. Find an element\n"
-			<< "9. Display the array\n"
+			<< "9. Display the list\n"
 			<< "0. Quit\n"
 			<< "Your choice: ";
 
@@ -321,7 +376,6 @@ void ManualTest::list()
 		case '7':
 			system("cls");
 
-			std::cout << "\nEnter a value to remove: ";
 			getUserInput(value, "value");
 			timer->start();
 			list->remove(value);
@@ -371,7 +425,8 @@ void ManualTest::list()
 
 void ManualTest::heap()
 {
-	bool end = false;
+	bool end = false,
+		loadFromFile = false;
 	char choice;
 	int value;
 
@@ -380,6 +435,17 @@ void ManualTest::heap()
 	Timer *timer = new Timer();
 
 	MaxHeap *heap = new MaxHeap();
+
+	loadFromFile = askIfLoadFromFile();
+	if (loadFromFile)
+	{
+		while (inputFile >> value)
+		{
+			heap->push(value);
+		}
+	}
+
+	inputFile.close();
 
 	while (!end)
 	{
@@ -500,7 +566,8 @@ void ManualTest::heap()
 
 void ManualTest::RBTree()
 {
-	bool end = false;
+	bool end = false,
+		loadFromFile = false;
 	char choice;
 	int value;
 
@@ -509,6 +576,17 @@ void ManualTest::RBTree()
 	Timer *timer = new Timer();
 
 	RedBlackTree *tree = new RedBlackTree();
+
+	loadFromFile = askIfLoadFromFile();
+	if (loadFromFile)
+	{
+		while (inputFile >> value)
+		{
+			tree->insertValue(value);
+		}
+	}
+
+	inputFile.close();
 
 	while (!end)
 	{
@@ -634,7 +712,8 @@ void ManualTest::RBTree()
 
 void ManualTest::AVLTree()
 {
-	bool end = false;
+	bool end = false,
+		loadFromFile = false;
 	char choice;
 	int value;
 
@@ -643,6 +722,17 @@ void ManualTest::AVLTree()
 	Timer *timer = new Timer();
 
 	::AVLTree *tree = new ::AVLTree();
+
+	loadFromFile = askIfLoadFromFile();
+	if (loadFromFile)
+	{
+		while (inputFile >> value)
+		{
+			tree->insertValue(value);
+		}
+	}
+
+	inputFile.close();
 
 	while (!end)
 	{

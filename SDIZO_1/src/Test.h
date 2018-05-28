@@ -4,6 +4,8 @@
 #include <fstream>
 #include <istream>
 #include <sstream>
+#include <windows.h>
+#include <conio.h>
 
 class Test
 {
@@ -13,9 +15,12 @@ protected:
 	std::ofstream outputFile;
 	std::ifstream inputFile;
 
+	bool getInputFile();
+	bool getOutputFile(std::string);
+
 public:
-	bool getInputFile(std::string mainFolder);
-	bool getOutputFile(std::string mainFolder);
+	void getUserInput(int&, std::string);
+	void getInputOutputFiles(std::string);
 
 	virtual void array() = 0;
 	virtual void list() = 0;
